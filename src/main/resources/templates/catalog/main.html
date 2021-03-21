@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+    <div th:replace="common/top">
+
+    </div>
+
+    <div id="Main">
+        <div id="Welcome">
+            <div id="WelcomeContent">
+                Welcome to MyPetStore!
+            </div>
+        </div>
+        <div id="Sidebar">
+            <div id="SidebarContent">
+                <a href="category?categoryId=FISH"><img src="../images/fish_icon.gif" /></a>
+                <br/> Saltwater, Freshwater <br/>
+                <a href="category?categoryId=DOGS"><img src="../images/dogs_icon.gif" /></a>
+                <br /> Various Breeds <br />
+                <a href="category?categoryId=CATS"><img src="../images/cats_icon.gif" /></a>
+                <br /> Various Breeds, Exotic Varieties <br />
+                <a href="category?categoryId=REPTILES"><img src="../images/reptiles_icon.gif" /></a>
+                <br /> Lizards, Turtles, Snakes <br />
+                <a href="category?categoryId=BIRDS"><img src="../images/birds_icon.gif" /></a>
+                <br /> Exotic Varieties
+            </div>
+        </div>
+
+        <div id="MainImage">
+            <div id="MainImageContent">
+                <map name="estoremap">
+                    <area id="Birds" alt="Birds" coords="72,2,280,250" href="category?categoryId=BIRDS" shape="rect" onmouseover="show(this.alt.toUpperCase())" onmouseleave="hide()" />
+                    <area id="Fish" alt="Fish" coords="2,180,72,250" href="category?categoryId=FISH" shape="rect" onmouseover="show(this.alt.toUpperCase())" onmouseleave="hide()"/>
+                    <area id="Dogs" alt="Dogs" coords="60,250,130,320" href="category?categoryId=DOGS" shape="rect" onmouseover="show(this.alt.toUpperCase())" onmouseleave="hide()"/>
+                    <area id="Reptiles" alt="Reptiles" coords="140,270,210,340" href="category?categoryId=REPTILES" shape="rect" onmouseover="show(this.alt.toUpperCase())" onmouseleave="hide()"/>
+                    <area id="Cats" alt="Cats" coords="225,240,295,310" href="category?categoryId=CATS" shape="rect" onmouseover="show(this.alt.toUpperCase())" onmouseleave="hide()"/>
+                    <area id="Birds2" alt="Birds" coords="280,180,350,250" href="category?categoryId=BIRDS" shape="rect" onmouseover="show(this.alt.toUpperCase())" onmouseleave="hide()"/>
+                </map>
+                <img height="355" src="../images/splash.gif" align="middle" usemap="#estoremap" width="350" />
+            </div>
+        </div>
+        <div id="Separator">&nbsp;</div>
+
+        <me-div id="message" style="text-align:center;position: fixed;border:1px solid #000;background-color: #f5f3e5;right: 13%;top: 190px;width: 230px;" >products information</me-div>
+    </div>
+    <script>
+
+        function show(name){
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var products = JSON.parse(this.responseText);
+                    var num=0,i=0;
+                    num=products.length;
+                    var show = "<table><tr><td>productID</td><td>name</td></tr>";
+                    for(i=0;i<num;i++){
+                        show += "<tr>";
+                        show += "<td>" + products[i]["id"] + "</td>" + "<td>" + products[i]["name"] + "</td>";
+                        show += "</tr>";
+                    }
+                    show += "</table>";
+                    $("#message").html(show);
+                    $("#message").height = num*30+"px";
+                }
+            };
+            xmlhttp.open("GET", "products?Category=" + name, true);
+            xmlhttp.send();
+        }
+
+        function hide(){
+            $("#message").text("products information");
+        }
+    </script>
+
+    <div th:replace="common/bottom">
+
+    </div>
+</body>
+</html>

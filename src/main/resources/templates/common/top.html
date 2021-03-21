@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+    <header th:fragment="header">
+        <div id="Header">
+
+            <div id="Logo">
+                <div id="LogoContent">
+                    <a href="main"><img src="../images/logo-topbar.gif" /></a>
+                </div>
+            </div>
+
+            <div id="Menu">
+                <div id="MenuContent">
+                    <a href="cart"><img align="middle" name="img_cart" src="../images/cart.gif" /></a>
+                    <img align="middle" src="../images/separator.gif" />
+<!--                    <c:if test="${sessionScope.accountId == null}">-->
+<!--                        <a href="loginForm">Sign In</a>-->
+<!--                    </c:if>-->
+<!--                    <c:if test="${sessionScope.accountId != null}">-->
+<!--                        <a href="signout">${sessionScope.accountId} Sign Out</a>-->
+<!--                        <img align="middle" src="../images/separator.gif" />-->
+<!--                        <a href="accountForm">My Account</a>-->
+<!--                        <img align="middle" src="../images/separator.gif" />-->
+<!--                    </c:if>-->
+                        <a href="loginForm">Sign In</a>
+                        <a href="signout">Sign Out</a>
+                        <img align="middle" src="../images/separator.gif" />
+                        <a href="accountForm">My Account</a>
+                        <img align="middle" src="../images/separator.gif" />
+                    <a href="help.html">?</a>
+                </div>
+            </div>
+
+            <div id="Search">
+                <div id="SearchContent">
+                    <form action="search" method="post">
+                        <div>
+                            <input id="keyword" type="text" name="keyword" size="14" oninput="find(this.value)" autocomplete=off/>
+                            <input type="submit" name="search" value="Search"/>
+                        </div>
+                        <div id="find"></div>
+
+                        <script>
+                            $("#find").hide();
+
+                            function find(keyword){
+                                if (keyword.length == 0) {
+                                    $("#find").hide();
+                                    return;
+                                } else {
+                                    var xmlhttp = new XMLHttpRequest();
+                                    xmlhttp.onreadystatechange = function() {
+                                        if (this.readyState == 4 && this.status == 200) {
+                                            var items = JSON.parse(this.responseText);
+                                            if(items.length==0) {
+                                                $("#find").hide();
+                                            }else{
+                                                var num=0,i=0;
+                                                if(items.length>=5)
+                                                    num=5;
+                                                else
+                                                    num=items.length;
+                                                var show = "";
+                                                for(i=0;i<num;i++){
+                                                    show += "<div onclick='getValue(\"" + items[i] + "\")'>" + items[i] + "</div>";
+                                                }
+                                                $("#find").html(show);
+                                                $("#find").height = num*30+"px";
+                                                $("#find").show();
+                                            }
+                                        }
+                                    };
+                                    xmlhttp.open("GET", "buquan?name=" + keyword, true);
+                                    xmlhttp.send();
+                                }
+                            }
+
+                            function getValue(value){
+                                $("#keyword").val(value);
+                                $("#find").hide();
+                            }
+                        </script>
+                    </form>
+                </div>
+            </div>
+
+            <div id="QuickLinks">
+                <a href="category?categoryId=FISH">
+                    <img src="../images/sm_fish.gif">
+                </a>
+                <img src="../images/separator.gif">
+                <a href="category?categoryId=DOGS">
+                    <img src="../images/sm_dogs.gif">
+                </a>
+                <img src="../images/separator.gif">
+                <a href="category?categoryId=REPTILES">
+                    <img src="../images/sm_reptiles.gif">
+                </a>
+                <img src="../images/separator.gif">
+                <a href="category?categoryId=CATS">
+                    <img src="../images/sm_cats.gif">
+                </a>
+                <img src="../images/separator.gif">
+                <a href="category?categoryId=BIRDS">
+                    <img src="../images/sm_birds.gif">
+                </a>
+            </div>
+        </div>
+    </header>
+</body>
+</html>
