@@ -34,7 +34,7 @@ public class AccountService {
         accountMapper.insertSignon(account);
     }
 
-    // 更新用户数据，需要密码正常
+    // 更新用户数据，要求密码不为空
     @Transactional
     public void updateAccount(Account account) {
         accountMapper.updateAccount(account);
