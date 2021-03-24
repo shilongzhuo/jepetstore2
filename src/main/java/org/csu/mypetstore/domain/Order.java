@@ -41,10 +41,6 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
     public int getOrderId() {
         return orderId;
     }

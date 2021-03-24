@@ -15,10 +15,6 @@ public class LineItem implements Serializable {
     private Item item;
     private BigDecimal total;
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
     public int getOrderId() {
         return orderId;
     }
