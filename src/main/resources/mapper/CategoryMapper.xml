@@ -19,4 +19,29 @@
             descn as description
         from category
     </select>
+
+    <insert id="insertCategory" parameterType="Category">
+        insert into category(
+            catId,
+            name,
+            descn
+        )
+        values(
+            #{categoryId},
+            #{name},
+            #{description}
+        )
+    </insert>
+
+    <update id="updateCategory" parameterType="Category">
+        update category set
+            catId = #{categoryId},
+            name = #{name},
+            descn = #{description}
+        where catId = #{categoryId}
+    </update>
+
+    <delete id="delCategoryByCategoryId" parameterType="string">
+        delete from category where catId = #{categoryId}
+    </delete>
 </mapper>

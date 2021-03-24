@@ -98,43 +98,90 @@
             cardType,
             locale)
         value(
-        #{orderId},
-        #{username},
-        #{orderDate},
-        #{shipAddress1},
-        #{shipAddress2,jdbcType=VARCHAR},
-        #{shipCity},
-        #{shipState},
-        #{shipZip},
-        #{shipCountry},
-        #{billAddress1},
-        #{billAddress2,jdbcType=VARCHAR},
-        #{billCity},
-        #{billState},
-        #{billZip},
-        #{billCountry},
-        #{courier},
-        #{totalPrice},
-        #{billToFirstName},
-        #{billToLastName},
-        #{shipToFirstName},
-        #{shipToLastName},
-        #{creditCard},
-        #{expiryDate},
-        #{cardType},
-        #{locale})
+            #{orderId},
+            #{username},
+            #{orderDate},
+            #{shipAddress1},
+            #{shipAddress2,jdbcType=VARCHAR},
+            #{shipCity},
+            #{shipState},
+            #{shipZip},
+            #{shipCountry},
+            #{billAddress1},
+            #{billAddress2,jdbcType=VARCHAR},
+            #{billCity},
+            #{billState},
+            #{billZip},
+            #{billCountry},
+            #{courier},
+            #{totalPrice},
+            #{billToFirstName},
+            #{billToLastName},
+            #{shipToFirstName},
+            #{shipToLastName},
+            #{creditCard},
+            #{expiryDate},
+            #{cardType},
+            #{locale})
     </insert>
     
     <insert id="insertOrderStatus" parameterType="Order">
         insert into orderStatus(
-        orderid,
-        lineNum,
-        timeStamp,
-        status)
+            orderid,
+            lineNum,
+            timeStamp,
+            status)
         values(
-        #{orderId,jdbcType=NUMERIC},
-        #{orderId,jdbcType=NUMERIC},
-        #{orderDate,jdbcType=TIMESTAMP},
-        #{status,jdbcType=VARCHAR})
+            #{orderId,jdbcType=NUMERIC},
+            #{orderId,jdbcType=NUMERIC},
+            #{orderDate,jdbcType=TIMESTAMP},
+            #{status,jdbcType=VARCHAR})
     </insert>
+
+    <update id="updateOrder" parameterType="Order">
+        update order set
+            orderId =  #{orderId},
+            userId = #{username},
+            orderDate = #{orderDate},
+            shipaddr1 = #{shipAddress1},
+            shipaddr2 = #{shipAddress2},
+            shipCity = #{shipCity},
+            shipState = #{shipState},
+            shipZip = #{shipZip},
+            shipCountry = #{shipCountry},
+            billaddr1 = #{billAddress1},
+            billaddr2 = #{billAddress2},
+            billCity = #{billCity},
+            billState = #{billState},
+            billZip = #{billZip},
+            billCountry = #{billCountry},
+            courier = #{courier},
+            totalprice = #{totalPrice},
+            billToFirstName = #{billToFirstName},
+            billToLastName = #{billToLastName},
+            shipToFirstName = #{shipToFirstName},
+            shipToLastName = #{shipToLastName},
+            creditCard = #{creditCard},
+            exprDate = #{expiryDate},
+            cardType = #{cardType},
+            locale = #{locale}
+        where orderId =  #{orderId}
+    </update>
+
+    <update id="updateOrderStatus" parameterType="Order">
+        update orderStatus set
+            orderId = #{orderId},
+            linenum = #{LineItems.size()},
+            timestamp = #{orderDate},
+            status = #{status}
+        where orderId = #{orderId}
+    </update>
+
+    <delete id="delOrderByOrderId" parameterType="string">
+        delete from orders where orderId = #{orderId}
+    </delete>
+
+    <delete id="delOrderStatusByOrderId"  parameterType="string">
+        delete from orderstatus where orderId = #{orderid}
+    </delete>
 </mapper>

@@ -15,4 +15,12 @@ public interface OrderMapper {
     void insertOrder(Order order);
 
     void insertOrderStatus(Order order);
+
+    void updateOrder(Order order);
+
+    void updateOrderStatus(Order order);
+
+    void delOrderByOrderId(String orderId);
+
+    void delOrderStatusByOrderId(String orderId);
 }
