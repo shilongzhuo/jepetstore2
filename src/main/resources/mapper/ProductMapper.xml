@@ -23,7 +23,7 @@
         WHERE PRODUCTID = #{productID}
     </select>
     
-    <select id="searchProductList" parameterType="string" resultType="Produdt">
+    <select id="searchProductList" parameterType="string" resultType="Product">
         select
             productId,
             name,

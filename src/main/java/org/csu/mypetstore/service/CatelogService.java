@@ -26,6 +26,7 @@ public class CatelogService {
     public List<Category> getCategoryList(){
         return categoryMapper.getCategoryList();
     }
+
     //小类
     @Autowired
     private ProductMapper productMapper;
@@ -57,6 +58,5 @@ public class CatelogService {
     public void updateInventoryQuantity(Map<String,Object> param){
         itemMapper.updateInventoryQuantity(param);
     }
-
 
 }

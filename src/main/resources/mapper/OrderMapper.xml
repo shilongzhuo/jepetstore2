@@ -2,20 +2,139 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper>
-    <select id="getOrdersByUsername" parameterType="string" resultType="Order">
-        
-    </select>
-    
+<mapper namespace="org.csu.mypetstore.persistence.OrderMapper">
     <select id="getOrder" parameterType="int" resultType="Order">
-        
+        select
+            billaddr1 as billAddress1,
+            billaddr2 as billAddress2,
+            billCity,
+            billCountry,
+            billState,
+            billToFirstName,
+            billToLastName,
+            billZip,
+            shipaddr1 as shipAddress1,
+            shipaddr2 as shipAddress2,
+            shipCity,
+            shipCountry,
+            shipState,
+            shipToFirstname,
+            shipToLastName,
+            shipZip,
+            cardtype,
+            courier,
+            creditCard,
+            exprdate as expireDate,
+            locale,
+            orderDate,
+            orders.orderId,
+            totalPrice,
+            userId as username,
+            status
+        from orders, orderstatus
+        where orders,orderId = #{orderId}
+            and orders.orderId = orderStatus.orderId
     </select>
     
-    <select id="insertOrder" parameterType="Order">
-        
+    <select id="getOrdersByUsername" parameterType="string" resultType="Order">
+        select
+            billaddr1 as billAddress1,
+            billaddr2 as billAddress2,
+            billCity,
+            billCountry,
+            billState,
+            billToFirstName,
+            billToLastName,
+            billZip,
+            shipaddr1 as shipAddress1,
+            shipaddr2 as shipAddress2,
+            shipCity,
+            shipCountry,
+            shipState,
+            shipToFirstname,
+            shipToLastName,
+            shipZip,
+            cardtype,
+            courier,
+            creditCard,
+            exprdate as expireDate,
+            locale,
+            orderDate,
+            orders.orderId,
+            totalPrice,
+            userId as username,
+            status
+        from orders, orderStatus
+        where order.userId = #{username}
+            and orders.orderId = orderStatus.orderid
+        order by orderDate
     </select>
     
-    <select id="insertOrderStatus" parameterType="Order">
-
-    </select>
+    <insert id="insertOrder" parameterType="Order">
+        insert into orders(
+            orderId,
+            userId,
+            orderDate,
+            shipaddr1,
+            shipaddr2,
+            shipCity,
+            shipState,
+            shipZip,
+            shipCountry,
+            billaddr1,
+            billaddr2,
+            billCity,
+            billState,
+            billZip,
+            billCountry,
+            courier,
+            totalprice,
+            billToFirstName,
+            billToLastName,
+            shipToFirstName,
+            shipToLastName,
+            creditCard,
+            exprDate,
+            cardType,
+            locale)
+        value(
+        #{orderId},
+        #{username},
+        #{orderDate},
+        #{shipAddress1},
+        #{shipAddress2,jdbcType=VARCHAR},
+        #{shipCity},
+        #{shipState},
+        #{shipZip},
+        #{shipCountry},
+        #{billAddress1},
+        #{billAddress2,jdbcType=VARCHAR},
+        #{billCity},
+        #{billState},
+        #{billZip},
+        #{billCountry},
+        #{courier},
+        #{totalPrice},
+        #{billToFirstName},
+        #{billToLastName},
+        #{shipToFirstName},
+        #{shipToLastName},
+        #{creditCard},
+        #{expiryDate},
+        #{cardType},
+        #{locale})
+    </insert>
+    
+    <insert id="insertOrderStatus" parameterType="Order">
+        insert into orderStatus(
+        orderid,
+        lineNum,
+        timeStamp,
+        status)
+        values(
+        #{orderId,jdbcType=NUMERIC},
+        #{orderId,jdbcType=NUMERIC},
+        #{orderDate,jdbcType=TIMESTAMP},
+        #{status,jdbcType=VARCHAR})
+    </insert>
 </mapper>
