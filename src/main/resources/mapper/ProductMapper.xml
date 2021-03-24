@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.csu.mypetstore.persistence.ProductMapper">
+    <select id="getProductListByCategory" parameterType="string" resultType="Product">
+        SELECT
+            productid,
+            name,
+            descn AS description,
+            category AS categoryId
+        FROM product
+        WHERE category = #{categoryId}
+    </select>
+
+    <select id="getProduct" parameterType="string" resultType="Product">
+        SELECT
+            PRODUCTID,
+            NAME,
+            DESCN AS description,
+            CATEGORY AS categoryId
+        FROM PRODUCT
+        WHERE PRODUCTID = #{productID}
+    </select>
+    
+    <select id="searchProductList" parameterType="string" resultType="Product">
+        select
+            productId,
+            name,
+            descn as description,
+            category as categoryId
+        from product
+        where lower(name) like #{keywords}
+    </select>
+</mapper>
