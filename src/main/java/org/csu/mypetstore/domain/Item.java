@@ -8,17 +8,17 @@ public class Item implements Serializable {
 
     private String itemId;
     private String productId;
-    private BigDecimal lisPrice;
+    private BigDecimal listPrice;
     private BigDecimal unitcost;
     private int supplierId;
     private String status;
     private String attribute1;
     private String attribute2;
     private String attribute3;
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
+    private String attribute4;
+    private String attribute5;
+    private Product product;
+    private int quantity;
 
     public String getItemId() {
         return itemId;
@@ -36,12 +36,12 @@ public class Item implements Serializable {
         this.productId = productId;
     }
 
-    public BigDecimal getLisPrice() {
-        return lisPrice;
+    public BigDecimal getListPrice() {
+        return listPrice;
     }
 
-    public void setLisPrice(BigDecimal lisPrice) {
-        this.lisPrice = lisPrice;
+    public void setListPrice(BigDecimal lisPrice) {
+        this.listPrice = lisPrice;
     }
 
     public BigDecimal getUnitcost() {
@@ -123,10 +123,5 @@ public class Item implements Serializable {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-
-    private String attribute4;
-    private String attribute5;
-    private Product product;
-    private int quantity;
 
 }
