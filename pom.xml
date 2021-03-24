@@ -52,6 +52,14 @@
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/net.sourceforge.stripes/stripes -->
+        <dependency>
+            <groupId>net.sourceforge.stripes</groupId>
+            <artifactId>stripes</artifactId>
+            <version>1.6.0</version>
+        </dependency>
+
+
     </dependencies>
 
     <dependencyManagement>
