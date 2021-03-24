@@ -20,11 +20,11 @@ class MypetstoreApplicationTests {
 
     @Test
     void test(){
-//        Category c = catelogService.getCategory("birds");
-//        System.out.println(c.getDescription());
+        Category c = catelogService.getCategory("birds");
+        System.out.println(c.getDescription());
 //        catelogService.getProductListByCategory("BIRDS");
 //        catelogService.getInventoryQuantity("EST-1");
-        catelogService.getCategoryList();
+//        catelogService.getCategoryList();
     }
 
 }
