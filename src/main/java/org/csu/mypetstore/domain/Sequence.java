@@ -9,6 +9,14 @@ public class Sequence implements Serializable {
     private String name;
     private int nextId;
 
+    public Sequence() {
+    }
+
+    public Sequence(String name, int nextId) {
+        this.name = name;
+        this.nextId = nextId;
+    }
+
     public String getName() {
         return name;
     }
