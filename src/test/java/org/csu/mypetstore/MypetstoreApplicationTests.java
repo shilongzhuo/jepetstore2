@@ -23,7 +23,8 @@ class MypetstoreApplicationTests {
 //        Category c = catelogService.getCategory("birds");
 //        System.out.println(c.getDescription());
 //        catelogService.getProductListByCategory("BIRDS");
-        catelogService.getInventoryQuantity("EST-1");
+//        catelogService.getInventoryQuantity("EST-1");
+        catelogService.getCategoryList();
     }
 
 }
