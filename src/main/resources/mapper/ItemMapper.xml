@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.csu.mypetstore.persistence.ItemMapper">
+    <select id="getItem" parameterType="string" resultType="Item">
+        select
+            I.itemId,
+            listprice,
+            unitcost,
+            supplier as supplierId,
+            I.productId as "product.productId",
+            name as "prodcut.name",
+            descn as "product.description",
+            category as "prodcut.categoryId",
+            status,
+            attr1 as attribute1,
+            attr2 as attribute2,
+            attr3 as attribute3,
+            attr4 as attribute4,
+            attr4 as attribute5,
+            qty as quantity
+        from item I, inventory V, product P
+        where P.productId = I.productId
+            and I.itemId = V.itemId
+            and I.itemId = #{itemID}
+    </select>
+
+    <select id="getItemListByProduct" parameterType="string" resultType="Item">
+        select
+            I.itemId,
+            listprice,
+            unitcost,
+            supplier as supplierId,
+            I.productId as "product.productId",
+            name as "product.name",
+            descn as "product.description",
+            category as "product.description",
+            status,
+            attr1 as attribute1,
+            attr2 as attribute2,
+            attr3 as attribute3,
+            attr4 as attribute4,
+            attr5 as attribute5
+        from item I, product P
+        where P.productId = I.productId
+        and I.productId = #{productId}
+    </select>
+
+    <select id="getInventoryQuantity" parameterType="string" resultType="int">
+        select qty as value
+        from inventory
+        where itemId = #{itemId}
+    </select>
+
+    <update id="updateInventoryQuantity">
+        update inventory set
+            qty = qty - #{increment}
+        where itemId = #{itemId}
+    </update>
+</mapper>
