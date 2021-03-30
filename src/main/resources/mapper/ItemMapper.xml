@@ -60,7 +60,7 @@
     </update>
 
     <insert id="insertItem" parameterType="Item">
-        insert into product(
+        insert into item(
             itemId,
             productId,
             listprice,

@@ -5,37 +5,61 @@
 <mapper namespace="org.csu.mypetstore.persistence.CartItemMapper">
     <insert id="insertCartItem">
         insert into cart(
-            username,
-            cartItemId,
+            userid,
+            itemid,
             quantity
         )
         values(
-            #{username},
-            #{cartItemId},
-            #{quantity}
+            #{param1},
+            #{param2},
+            1
         )
     </insert>
 
     <delete id="delCartItem">
-        delete from cart where username = #{username} and cartItemId = #{cartItemId}
+        delete from cart where userid = #{param1} and itemid = #{param2}
     </delete>
 
     <update id="updateCartItem">
         update cart set
-            username = #{username},
-            cartItemId = #{cartItemId},
-            quantity = #{quantity}
-        where username = #{username}
-        and cartItemId = #{cartItemId}
+            userid = #{param1},
+            itemid = #{param2},
+            quantity = #{param3}
+        where username = #{param1}
+        and itemid = #{param2}
     </update>
 
-    <select id="getCartItemByUsername" parameterType="string" resultType="CartItemInf">
+    <select id="getCartItemIdByUsername" parameterType="string" resultType="string">
         select
-            username,
-            cartItemId,
-            quantity
+            itemid
         from cart
-        where username = #{username}
+        where userid = #{username}
+    </select>
+
+    <select id="getCartItemByUsernameAndItemId" resultType="CartItem">
+        select
+            itemId as "item.Itemid",
+            quantity,
+            item.listprice as "item.listprice",
+            item.unitcost as "item.unitcost",
+            item.supplier as "item.supplierId",
+            item.status as "item.status",
+            item.attr1 as "item.attribute1",
+            item.attr2 as "item.attribute2",
+            item.attr3 as "item.attribute3",
+            item.attr4 as "item.attribute4",
+            item.attr5 as "item.attribute5",
+            inventory.qty as "item.quantity",
+            product.producid as "item.product.productId",
+            prodcut.category as "item.product.category",
+            prodcut.name as "item.product.name",
+            product.descn as "item.product.description"
+        from cart,item,product,inventory
+        where cart.userId = #{param1}
+            and cart.itemId = #{param2}
+            and cart.itemId = item.itemId
+            and cart.itemId = inventory.itemId
+            and item.productId = product.productId
     </select>
 
 </mapper>

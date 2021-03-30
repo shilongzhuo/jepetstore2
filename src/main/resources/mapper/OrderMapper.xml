@@ -32,7 +32,7 @@
             userId as username,
             status
         from orders, orderstatus
-        where orders,orderId = #{orderId}
+        where orders.orderId = #{orderId}
             and orders.orderId = orderStatus.orderId
     </select>
     
@@ -65,7 +65,7 @@
             userId as username,
             status
         from orders, orderStatus
-        where order.userId = #{username}
+        where orders.userId = #{username}
             and orders.orderId = orderStatus.orderid
         order by orderDate
     </select>
