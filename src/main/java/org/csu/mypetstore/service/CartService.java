@@ -69,6 +69,11 @@ public class CartService {
         List<CartItem> cartItemList = getCartItemByUsername(username);
         for(int i=0;i<cartItemList.size();i++){
             cart.addItem(cartItemList.get(i).getItem(),cartItemList.get(i).isInStock());
+            int quantity = cartItemList.get(i).getQuantity();
+            String itemId = cartItemList.get(i).getItem().getItemId();
+            for(int p=0;p<quantity-1;p++){
+                cart.incrementQuantityByItemId(itemId);
+            }
         }
         return cart;
     }

@@ -25,7 +25,7 @@
             userid = #{param1},
             itemid = #{param2},
             quantity = #{param3}
-        where username = #{param1}
+        where userid = #{param1}
         and itemid = #{param2}
     </update>
 
@@ -38,8 +38,8 @@
 
     <select id="getCartItemByUsernameAndItemId" resultType="CartItem">
         select
-            itemId as "item.Itemid",
-            quantity,
+            cart.itemId as "item.itemId",
+            cart.quantity,
             item.listprice as "item.listprice",
             item.unitcost as "item.unitcost",
             item.supplier as "item.supplierId",
@@ -50,9 +50,9 @@
             item.attr4 as "item.attribute4",
             item.attr5 as "item.attribute5",
             inventory.qty as "item.quantity",
-            product.producid as "item.product.productId",
-            prodcut.category as "item.product.category",
-            prodcut.name as "item.product.name",
+            product.productid as "item.product.productId",
+            product.category as "item.product.categoryId",
+            product.name as "item.product.name",
             product.descn as "item.product.description"
         from cart,item,product,inventory
         where cart.userId = #{param1}
