@@ -1,16 +1,10 @@
-package org.csu.mypetstore.service;
+package org.csu.mypetstore.common;
 
-import org.springframework.stereotype.Service;
-
-import com.aliyun.tea.*;
-import com.aliyun.dysmsapi20170525.*;
 import com.aliyun.dysmsapi20170525.models.*;
-import com.aliyun.teaopenapi.*;
 import com.aliyun.teaopenapi.models.*;
 
-//发送手机验证码
-@Service
-public class SendSMSService {
+//发送手机验证码工具类
+public class SendSMSUtil {
 
     private static String accessKeyId = "LTAI5tDAgwgLiED9M935Ugt2";
     private static String accessKeySecret = "VGROV4IPC3KZX5oYuRNQr13A4wFE0N";
@@ -30,7 +24,7 @@ public class SendSMSService {
 
         String template = "{\"code\":\""+code+"\"}";
 
-        com.aliyun.dysmsapi20170525.Client client = SendSMSService.createClient("accessKeyId", "accessKeySecret");
+        com.aliyun.dysmsapi20170525.Client client = org.csu.mypetstore.common.SendSMSUtil.createClient("accessKeyId", "accessKeySecret");
         SendSmsRequest sendSmsRequest = new SendSmsRequest()
                 .setPhoneNumbers(phoneNumber)
                 .setSignName("jpetstore学习")
@@ -38,7 +32,5 @@ public class SendSMSService {
                 .setTemplateParam(template);
         // 打印返回信息
         System.out.println(client.sendSms(sendSmsRequest));
-
     }
-
 }

@@ -1,5 +1,6 @@
 package org.csu.mypetstore.service;
 
+import org.csu.mypetstore.common.SendSMSUtil;
 import org.csu.mypetstore.domain.Verification;
 import org.csu.mypetstore.persistence.VerificationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +33,9 @@ public class VerificationService {
         AccountService accountService = new AccountService();
         String phone = accountService.getAccount(username).getPhone();
         //发送验证码到用户手机
-        SendSMSService sendSMSService = new SendSMSService();
+        SendSMSUtil sendSMSUtil = new SendSMSUtil();
         try {
-            sendSMSService.sendSMS(phone,code);
+            sendSMSUtil.sendSMS(phone,code);
         } catch (Exception e) {
             e.printStackTrace();
         }
