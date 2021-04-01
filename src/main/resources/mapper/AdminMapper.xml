@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.csu.mypetstore.persistence.AdminMapper">
+
+    <select id="getAdmin" resultType="Admin">
+        select
+            adminId,
+            password
+        from admin
+        where adminId = #{param1}
+            and password = #{param2}
+    </select>
+
+    <insert id="insertAdmin" >
+        insert into admin(
+            adminId,
+            password
+        )
+        values(
+            #{param1},
+            #{param2}
+        )
+    </insert>
+</mapper>
