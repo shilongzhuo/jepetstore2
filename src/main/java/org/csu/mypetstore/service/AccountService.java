@@ -20,7 +20,7 @@ public class AccountService {
 
     public Account getAccount(String username, String password) {
         //数据库中搜索时用加密后的密码进行搜索
-        return accountMapper.getAccountByUsernameAndPassword(username,MD5Util.string2MD5(password));
+        return accountMapper.getAccountByUsernameAndPassword(username,MD5Util.md5(password));
     }
 
     //用户注册
@@ -29,7 +29,7 @@ public class AccountService {
         accountMapper.insertAccount(account);
         accountMapper.insertProfile(account);
         //对用户密码进行加密
-        account.setPassword(MD5Util.string2MD5(account.getPassword()));
+        account.setPassword(MD5Util.md5(account.getPassword()));
         accountMapper.insertSignon(account);
     }
 
@@ -41,7 +41,7 @@ public class AccountService {
 
         if (account.getPassword() != null && account.getPassword().length() > 0) {
             //对用户密码进行加密
-            account.setPassword(MD5Util.string2MD5(account.getPassword()));
+            account.setPassword(MD5Util.md5(account.getPassword()));
             accountMapper.updateSignon(account);
         }
     }

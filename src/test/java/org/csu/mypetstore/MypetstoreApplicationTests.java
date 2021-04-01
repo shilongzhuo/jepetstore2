@@ -1,9 +1,11 @@
 package org.csu.mypetstore;
 
 import org.csu.mypetstore.common.EmailUtil;
+import org.csu.mypetstore.common.MD5Util;
 import org.csu.mypetstore.domain.*;
 import org.csu.mypetstore.persistence.CartItemMapper;
 import org.csu.mypetstore.persistence.VerificationMapper;
+import org.csu.mypetstore.service.AdminService;
 import org.csu.mypetstore.service.CartService;
 import org.csu.mypetstore.service.OrderService;
 import org.csu.mypetstore.service.VerificationService;
@@ -20,15 +22,19 @@ import java.security.GeneralSecurityException;
 class MypetstoreApplicationTests {
 
     @Autowired
-    VerificationService verificationService;
+    AdminService adminService;
 
     @Test
     void contextLoads() {
     }
 
     @Test
-    void test(){
-       verificationService.delVerificationCodeByUsername("1843773386gyk");
+    void test() throws Exception {
+      adminService.insertAdmin("admin","123456");
+      Admin admin = adminService.getAdmin("admin","123456");
+      int a = 1;
+
+
     }
 
 }

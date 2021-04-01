@@ -1,7 +1,10 @@
 package org.csu.mypetstore.domain;
 
-public class Verification {
+import java.io.Serializable;
 
+public class Verification implements Serializable {
+
+    private static final long serialVersionUID = -665197850050478998L;
     private String username;
     private String code;
 

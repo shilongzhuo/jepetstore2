@@ -1,47 +1,26 @@
 package org.csu.mypetstore.common;
 
 import java.security.MessageDigest;
+import org.apache.commons.codec.digest.DigestUtils;
 
 //MD5加密工具类
 public class MD5Util {
 
-    //MD5加码 生成32位md5码
-    public static String string2MD5(String password) {
-        MessageDigest md5 = null;
-        try {
-            md5 = MessageDigest.getInstance("MD5");
-        } catch (Exception e) {
-            System.out.println(e.toString());
-            e.printStackTrace();
-            return "";
-        }
-        char[] charArray = password.toCharArray();
-        byte[] byteArray = new byte[charArray.length];
+    public static String key = "YiLuoYi";
 
-        for (int i = 0; i < charArray.length; i++) {
-            byteArray[i] = (byte) charArray[i];
-        }
-        byte[] md5Bytes = md5.digest(byteArray);
-        StringBuffer hexValue = new StringBuffer();
-        for (int i = 0; i < md5Bytes.length; i++) {
-            int val = ((int) md5Bytes[i]) & 0xff;
-            if (val < 16){
-                hexValue.append("0");
-            }
-            hexValue.append(Integer.toHexString(val));
-        }
-        return hexValue.toString();
+    public static String md5(String password) {
+
+        String md5str = DigestUtils.md5Hex(password + key);
+        return md5str;
     }
 
-    //加密解密算法 执行一次加密，两次解密
-    public static String convertMD5(String inStr) {
-
-        char[] a = inStr.toCharArray();
-        for (int i = 0; i < a.length; i++) {
-            a[i] = (char) (a[i] ^ 't');
+    public static boolean verify(String password,String md5)throws Exception{
+        String md5str = md5(password);
+        if (md5str.equalsIgnoreCase(md5)) {
+            System.out.println("MD5验证通过");
+            return true;
         }
-        String s = new String(a);
-        return s;
-
+        return false;
     }
+
 }

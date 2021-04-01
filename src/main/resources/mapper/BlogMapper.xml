@@ -9,7 +9,7 @@
             description,
             orderDate
         )
-        value (
+        values (
             #{username},
             #{description},
             #{orderDate}
