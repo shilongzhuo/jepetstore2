@@ -20,7 +20,7 @@ public class SendSMSUtil {
         return new com.aliyun.dysmsapi20170525.Client(config);
     }
 
-    public void sendSMS(String phoneNumber, String code)throws Exception {
+    public static void sendSMS(String phoneNumber, String code)throws Exception {
 
         String template = "{\"code\":\""+code+"\"}";
 
