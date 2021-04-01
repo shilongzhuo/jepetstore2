@@ -3,8 +3,10 @@ package org.csu.mypetstore;
 import org.csu.mypetstore.common.EmailUtil;
 import org.csu.mypetstore.domain.*;
 import org.csu.mypetstore.persistence.CartItemMapper;
+import org.csu.mypetstore.persistence.VerificationMapper;
 import org.csu.mypetstore.service.CartService;
 import org.csu.mypetstore.service.OrderService;
+import org.csu.mypetstore.service.VerificationService;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,7 @@ import java.security.GeneralSecurityException;
 class MypetstoreApplicationTests {
 
     @Autowired
-    CartService cartService;
+    VerificationService verificationService;
 
     @Test
     void contextLoads() {
@@ -26,13 +28,7 @@ class MypetstoreApplicationTests {
 
     @Test
     void test(){
-        try {
-            EmailUtil.sendEmail("1843773386gyk@gmail.com","123456789");
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        } catch (GeneralSecurityException e) {
-            e.printStackTrace();
-        }
+       verificationService.delVerificationCodeByUsername("1843773386gyk");
     }
 
 }

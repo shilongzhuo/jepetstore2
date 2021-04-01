@@ -13,10 +13,10 @@
     </select>
 
     <insert id="creatVerificationCodeByUsername" parameterType="string">
-        insert into verification{
+        insert into verification(
             username,
             code
-        }
+        )
         values(
             #{param1},
             #{param2}
@@ -25,7 +25,7 @@
     
     <update id="updateVerificationCodeByUsername" parameterType="string">
         update verification set
-            username = #{param1}
+            username = #{param1},
             code = #{param2}
         where username = #{param1}
     </update>
