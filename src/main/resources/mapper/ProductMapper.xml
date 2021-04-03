@@ -32,4 +32,32 @@
         from product
         where lower(name) like #{keywords}
     </select>
+
+    <insert id="insertProduct" parameterType="Product">
+        insert into product(
+            productId,
+            category,
+            name,
+            descn
+        )
+        values(
+            #{productId},
+            #{categoryId},
+            #{name},
+            #{description}
+        )
+    </insert>
+
+    <update id="updateProduct" parameterType="Product">
+        update product set
+            productId =  #{productId},
+            category = #{categoryId},
+            name = #{name},
+            descn = #{description}
+        where productId =  #{productId}
+    </update>
+
+    <delete id="delProductByProductId" parameterType="string">
+        delete from product where productId = #{productId}
+    </delete>
 </mapper>

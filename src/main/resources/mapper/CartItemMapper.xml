@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.csu.mypetstore.persistence.CartItemMapper">
+    <insert id="insertCartItem">
+        insert into cart(
+            userid,
+            itemid,
+            quantity
+        )
+        values(
+            #{param1},
+            #{param2},
+            1
+        )
+    </insert>
+
+    <delete id="delCartItem">
+        delete from cart where userid = #{param1} and itemid = #{param2}
+    </delete>
+
+    <update id="updateCartItem">
+        update cart set
+            userid = #{param1},
+            itemid = #{param2},
+            quantity = #{param3}
+        where userid = #{param1}
+        and itemid = #{param2}
+    </update>
+
+    <select id="getCartItemIdByUsername" parameterType="string" resultType="string">
+        select
+            itemid
+        from cart
+        where userid = #{username}
+    </select>
+
+    <select id="getCartItemByUsernameAndItemId" resultType="CartItem">
+        select
+            cart.itemId as "item.itemId",
+            cart.quantity,
+            item.listprice as "item.listprice",
+            item.unitcost as "item.unitcost",
+            item.supplier as "item.supplierId",
+            item.status as "item.status",
+            item.attr1 as "item.attribute1",
+            item.attr2 as "item.attribute2",
+            item.attr3 as "item.attribute3",
+            item.attr4 as "item.attribute4",
+            item.attr5 as "item.attribute5",
+            inventory.qty as "item.quantity",
+            product.productid as "item.product.productId",
+            product.category as "item.product.categoryId",
+            product.name as "item.product.name",
+            product.descn as "item.product.description"
+        from cart,item,product,inventory
+        where cart.userId = #{param1}
+            and cart.itemId = #{param2}
+            and cart.itemId = item.itemId
+            and cart.itemId = inventory.itemId
+            and item.productId = product.productId
+    </select>
+
+</mapper>

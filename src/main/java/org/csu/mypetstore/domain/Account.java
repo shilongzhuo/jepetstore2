@@ -1,6 +1,7 @@
 package org.csu.mypetstore.domain;
 
 import java.io.Serializable;
+import net.sourceforge.stripes.validation.Validate;
 
 public class Account implements Serializable {
 
@@ -24,10 +25,6 @@ public class Account implements Serializable {
     private boolean listOption;
     private boolean bannerOption;
     private String bannerName;
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
 
     public String getUsername() {
         return username;
@@ -57,6 +54,7 @@ public class Account implements Serializable {
         return firstName;
     }
 
+    @Validate(required=true, on={"newAccount", "editAccount"})
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -65,6 +63,7 @@ public class Account implements Serializable {
         return lastName;
     }
 
+    @Validate(required=true, on={"newAccount", "editAccount"})
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
