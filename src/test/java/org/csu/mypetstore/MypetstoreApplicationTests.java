@@ -23,16 +23,13 @@ class MypetstoreApplicationTests {
     }
 
     @Test
-    void test(){
+    void ServiceTest(){
 //        Category c = catelogService.getCategory("birds");
 //        System.out.println(c.getDescription());
-//        Account a = accountService.getAccount("ACID");
-//        System.out.println(a.getUsername()+","+a.getEmail()+","+a.getFirstName()+","+a.getLastName()+","+a.getStatus()
-//                +","+a.getAddress1()+","+a.getAddress2()+","+a.getCity()+","+a.getState()+","+a.getZip()+","+a.getCountry()+","+a.getPhone());
-        Account a = new Account();
-        a.setUsername("abc");
-        a.setPassword("ser");
-        accountService.insertAccount(a);
+        Account a = accountService.getAccount("ACID");
+        System.out.println(a.getUsername()+","+a.getEmail()+","+a.getFirstName()+","+a.getLastName()+","+a.getStatus()
+                +","+a.getAddress1()+","+a.getAddress2()+","+a.getCity()+","+a.getState()+","+a.getZip()+","+a.getCountry()+","+a.getPhone());
+
     }
 
 }
