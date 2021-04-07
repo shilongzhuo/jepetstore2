@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="common/top"></div>
+<div th:replace="cart/IncludeMyList"></div>
+
+<div id="BackLink">
+    <a href="main">Return to Main Menu</a>
+</div>
+
+<div id="Catalog">
+
+    <div id="Cart">
+
+        <h2>Shopping Cart</h2>
+        <form action="update" method="post">
+            <table>
+                <tr>
+                    <th><b>Item ID</b></th>
+                    <th><b>Product ID</b></th>
+                    <th><b>Description</b></th>
+                    <th><b>In Stock?</b></th>
+                    <th><b>Quantity</b></th>
+                    <th><b>List Price</b></th>
+                    <th><b>Total Cost</b></th>
+                    <th>&nbsp;</th>
+                </tr>
+
+                <c:if test="${sessionScope.cart.numberOfItems == 0}">
+                    <tr>
+                        <td colspan="8"><b>Your cart is empty.</b></td>
+                    </tr>
+                </c:if>
+
+                <c:forEach var="cartItem" items="${sessionScope.cart.cartItems}">
+                    <tr>
+                        <td>
+                            <a href="item?itemId=${cartItem.item.itemId}">${cartItem.item.itemId}</a>
+                        </td>
+                        <td>
+                            ${cartItem.item.product.productId}
+                        </td>
+                        <td>
+                            ${cartItem.item.attribute1} ${cartItem.item.attribute2}
+                            ${cartItem.item.attribute3} ${cartItem.item.attribute4}
+                            ${cartItem.item.attribute5} ${cartItem.item.product.name}
+                        </td>
+                        <td>
+                            ${cartItem.inStock}
+                        </td>
+                        <td>
+                            <input type="text" name="${cartItem.item.itemId}" id="${cartItem.item.itemId}" value="${cartItem.quantity}"
+                                   onchange="update(this.id,this.value,${cartItem.item.listPrice})"/>
+                        </td>
+                        <td>
+                            <fmt:formatNumber value="${cartItem.item.listPrice}"
+                                              pattern="$#,##0.00" />
+                        </td>
+                        <td id="${cartItem.item.itemId}total">
+                            <fmt:formatNumber value="${cartItem.total}"
+                                              pattern="$#,##0.00" />
+                        </td>
+                        <td>
+                            <a href="remove?workingItemId=${cartItem.item.itemId}" class="Button">Remove</a>
+                        </td>
+                    </tr>
+                </c:forEach>
+                <tr>
+                    <td colspan="7">
+                        <input id="updateCart" type="submit" value="Update Cart"/>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+            </table>
+
+            <script>
+                function update(id,value,price) {
+                    if (value == "") {
+                        $("#" + id).val(0);
+                    } else {
+                        $("#" + id).val(value);
+                    }
+                    $("#" + id + "total").text("$"+(price * value));
+
+
+                    $.ajax({
+                        type: "get",
+                        url: "updatecart",
+                        data:{
+                            "name":id,
+                            "quantity":value
+                        },
+                    });
+                }
+            </script>
+
+        </form>
+
+        <c:if test="${sessionScope.cart.numberOfItems > 0}">
+            <%--		<a href="orderForm" class="Button">Proceed to Checkout</a>--%>
+            <a href="cartCheck" class="Button">Proceed to Checkout</a>
+        </c:if>
+    </div>
+
+    <div id="Separator">&nbsp;</div>
+</div>
+
+</html>

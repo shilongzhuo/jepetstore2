@@ -22,4 +22,6 @@ public interface ItemMapper {
     void updateItem(Item item);
 
     void delItemByItemId(String itemId);
+
+    void delItemByProductId(String productId);
 }

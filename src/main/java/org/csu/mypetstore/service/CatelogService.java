@@ -47,6 +47,11 @@ public class CatelogService {
     @Transactional
     public void delCategoryByCategoryId(String categoryId){
         categoryMapper.delCategoryByCategoryId(categoryId);
+        List<Product> productList = productMapper.getProductListByCategory(categoryId);
+        for(int i=0;i<productList.size();i++){
+            productMapper.delProductByProductId(productList.get(i).getProductId());
+            itemMapper.delItemByProductId(productList.get(i).getProductId());
+        }
     }
 
     //小类的增删改查
@@ -74,6 +79,7 @@ public class CatelogService {
     @Transactional
     public void delProductByProductId(String productId){
         productMapper.delProductByProductId(productId);
+        itemMapper.delItemByProductId(productId);
     }
 
     //商品的增删改查

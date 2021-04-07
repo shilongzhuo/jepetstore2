@@ -60,4 +60,8 @@
     <delete id="delProductByProductId" parameterType="string">
         delete from product where productId = #{productId}
     </delete>
+
+    <delete id="delProductByCategoryId" parameterType="string">
+        delete from product where category = #{categoryId}
+    </delete>
 </mapper>

@@ -17,7 +17,11 @@
     </insert>
 
     <delete id="delCartItem">
-        delete from cart where userid = #{param1} and itemid = #{param2}
+        delete from cart where userId = #{param1} and itemId = #{param2}
+    </delete>
+
+    <delete id="delCartByUsername">
+        delete from cart where userId = #{userId}
     </delete>
 
     <update id="updateCartItem">
