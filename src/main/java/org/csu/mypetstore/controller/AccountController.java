@@ -56,7 +56,7 @@ public class AccountController {
         }
     }
 
-    @GetMapping("/signon")
+    @PostMapping("/signon")
     public String signon(Account account,String verification,String Fruit, Model model) {
         if(Fruit.equals("User")){
             if(verificationService.getVerificationCodeByUsername(account.getUsername())==null){//判断是否已经获得验证码
