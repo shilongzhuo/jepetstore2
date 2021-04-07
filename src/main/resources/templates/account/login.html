@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/login.css">
+    <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+<!--<script type="text/javascript" src="../js/login.js"></script>-->
+
+<div id="Catalog">
+
+    <form>
+        <div id="container">
+
+            <div class="Login-wrapper">
+                <div class="header"> Login</div>
+                <div class="form-wrapper">
+                    <input type="text" name="username" placeholder="Username" class="input-item" id = "account" />
+                    <input type="password" name="password" placeholder="Password" class="input-item" id = "adminPswd"/>
+                    <div class="form-inline">
+                        <input type="text" name="verification" placeholder="Verification" class="form-control" id = "verification"/>
+                        <input type="button" id="getVerification" value="获取验证码"/><br/>
+                        <label><input name="Fruit" type="radio" value="" checked = "checked" id = "user"/>User </label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <label><input name="Fruit" type="radio" value=""  id = "admin"/>Admin </label>
+                    </div>
+                    <input name="signon" value="Login" class = "btn" id="check" />
+                    <div class="msg">
+                        Don't have account? <a href="account/NewAccountForm">Sign up</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+</div>
+
+<script src="../js/login.js" async defer></script>
+</body>
+</html>
+

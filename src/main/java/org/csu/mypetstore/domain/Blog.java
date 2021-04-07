@@ -1,7 +1,7 @@
 package org.csu.mypetstore.domain;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 public class Blog implements Serializable {
 

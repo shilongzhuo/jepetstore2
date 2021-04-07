@@ -35,6 +35,11 @@ public class CartService {
         cartItemMapper.delCartItem(username,cartItemId);
     }
 
+    //清空某人的购物车
+    public void delCartByUsername(String usernamne){
+        cartItemMapper.delCartByUsername(usernamne);
+    }
+
     //更新购物车中的信息（插入多个商品或修改多个商品的数量）
     @Transactional
     public void updateCartItem(String username,String cartItemId,int quantity){
@@ -58,6 +63,7 @@ public class CartService {
     //获取某个商品
     public CartItem getCartItemByUsernameAndItemId(String username,String cartItemId){
         CartItem cartItem = cartItemMapper.getCartItemByUsernameAndItemId(username, cartItemId);
+        cartItem.getItem().setItemId(cartItemId);
         cartItem.setQuantity(cartItem.getQuantity());
         cartItem.setInStock(cartItem.getItem().getQuantity()>=cartItem.getQuantity());
         return cartItem;

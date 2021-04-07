@@ -107,4 +107,8 @@
     <delete id="delItemByItemId" parameterType="string">
         delete from item where itemId = #{itemId}
     </delete>
+
+    <delete id="delItemByProductId" parameterType="string">
+        delete from item where productId = #{productId}
+    </delete>
 </mapper>

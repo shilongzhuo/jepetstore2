@@ -23,4 +23,6 @@ public interface OrderMapper {
     void delOrderByOrderId(String orderId);
 
     void delOrderStatusByOrderId(String orderId);
+
+    int getSoldItemQuantityByItemId(String itemId);
 }

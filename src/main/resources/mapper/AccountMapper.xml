@@ -140,4 +140,10 @@
             #{username}
         )
     </insert>
+
+    <select id="getAccountList" resultType="string">
+        select distinct
+            username
+        from signon
+    </select>
 </mapper>

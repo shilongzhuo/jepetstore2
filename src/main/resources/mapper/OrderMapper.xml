@@ -184,4 +184,11 @@
     <delete id="delOrderStatusByOrderId"  parameterType="string">
         delete from orderstatus where orderId = #{orderid}
     </delete>
+
+    <select id="getSoldItemQuantityByItemId" resultType="int">
+        select
+            sum(lineItem)
+        from orderitem
+        where itemId = #{itemId}
+    </select>
 </mapper>

@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class AccountService {
 
@@ -44,5 +47,14 @@ public class AccountService {
             account.setPassword(MD5Util.md5(account.getPassword()));
             accountMapper.updateSignon(account);
         }
+    }
+
+    public List<Account> geAccountList(){
+        List<Account> accountList = new ArrayList<Account>();
+        List<String> accountNameList = accountMapper.getAccountList();
+        for (int i=0;i<accountNameList.size();i++){
+            accountList.add(accountMapper.getAccountByUsername(accountNameList.get(i)));
+        }
+        return accountList;
     }
 }

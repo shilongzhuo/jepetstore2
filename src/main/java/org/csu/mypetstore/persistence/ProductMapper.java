@@ -19,4 +19,6 @@ public interface ProductMapper {
      void updateProduct(Product product);
 
      void delProductByProductId(String productId);
+
+     void delProductByCategoryId(String categoryId);
 }

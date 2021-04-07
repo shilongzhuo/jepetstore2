@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="common/top"></div>
+
+<div>
+    <script type="text/javascript">
+        function changeCode(){
+            var img = document.getElementsByTagName("img")[12];
+            img.src = "validateCode?time="+new Date().getTime();
+        }
+    </script>
+</div>
+
+<div id="Catalog">
+
+    <form action="register" method="post" name="userInfo" id="userInfo">
+
+        <h3>User Information</h3>
+
+        <table>
+            <tr>
+                <td>User ID:</td>
+                <td colspan="2">
+                    <input type="text" name="username" id="username" onblur="usernameIsExist(this.value);"/>
+                    <div id="usernameInfo"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>New password:</td>
+                <td colspan="2"><input type="password" name="password" /></td>
+            </tr>
+            <tr>
+                <td>Repeat password:</td>
+                <td colspan="2"><input type="password" name="repeatedPassword"/></td>
+            </tr>
+            <tr>
+                <td>
+                    ValidateCode:
+                </td>
+                <td colspan="2">
+                    <input type="text" id="verifyCode" name="verifyCode" onkeyup="this.value=this.value.toUpperCase()">
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <img src="validateCode" onclick="changeCode()" id="verifyCode-img">
+                </td>
+                <td>
+                    <a href="javascript:changeCode()">change a code</a>
+                </td>
+            </tr>
+        </table>
+
+        <%--		<include file="IncludeAccountFields.html"/>--%>
+        <p id="msg"><font color="red">${requestScope.msg}</font></p>
+        <input type="submit" name="newAccount" value="Save Account Information"/>
+
+        <script>
+            function usernameIsExist(name){
+                if(name.length==0)
+                    $("#msg").html("");
+                else{
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function (){
+                        if(xmlhttp.status==200&&xmlhttp.readyState==4) {
+                            var massage = xmlhttp.responseText;
+                            $("#msg").html("<font color=\"red\">" + massage + "</font-color>");
+                        }
+                    }
+                    xmlhttp.open("GET","check?name=" + name);
+                    xmlhttp.send();
+                }
+            }
+        </script>
+    </form>
+</div>
+
+<div th:replace="common/bottom"></div>
+
+</html>

@@ -101,4 +101,8 @@ public class OrderService {
         orderMapper.delOrderByOrderId(orderId);
         orderMapper.delOrderStatusByOrderId(orderId);
     }
+
+    public int getSoledItemQuantityByItemId(String itemId){
+        return orderMapper.getSoldItemQuantityByItemId(itemId);
+    }
 }

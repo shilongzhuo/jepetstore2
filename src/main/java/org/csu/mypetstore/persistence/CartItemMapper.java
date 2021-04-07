@@ -12,6 +12,8 @@ public interface CartItemMapper {
 
     void delCartItem(String username,String cartItemId);
 
+    void delCartByUsername(String username);
+
     void updateCartItem(String username,String cartItemId,int quantity);
 
     List<String> getCartItemIdByUsername(String username);

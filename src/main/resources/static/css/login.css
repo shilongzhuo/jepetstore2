@@ -1,0 +1,115 @@
+#one{
+    color: #6699ff;
+}
+* {
+    padding: 0;
+    margin: 0;
+    font-family:'Open Sans Light';
+    letter-spacing:.05em;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+}
+
+
+.Login-wrapper{
+    width:350px;
+    background-color:#f5efef;
+    height:500px;
+    border-radius:15px;
+    padding:0 50px;
+    position:absolute;
+    left:50%;
+    top:20%;
+    transform:translate(-50%,0%);
+}
+#container
+{
+
+    height: 1000px;
+    width: 1800px;
+    background-image: linear-gradient(to right,#fbc2eb,#a6c1ee);
+}
+.Login-wrapper .header{
+    font-size:30px;
+    font-weight:bold;
+    text-align:center;
+    line-height:150px;
+}
+
+.input-item{
+    display:block;
+    width:100%;
+    margin-bottom:20px;
+    border:0;
+    padding:10px;
+    border-bottom:1px solid rgb(128,125,125);
+    font-size:15px;
+    outline:none;
+
+}
+.form-control
+{
+    /* display:block; */
+    width:70%;
+    margin-bottom:20px;
+    border:0;
+    padding:10px;
+    border-bottom:1px solid rgb(128,125,125);
+    font-size:15px;
+    /* outline:none; */
+}
+#getVerification
+{
+    width: 28%;
+    height: 40px;
+    font-size: 10px;
+    font-family: Arial;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border: 0;
+    /*background-color: rgb(45, 172, 153);*/
+    /* position: absolute;
+    top: 55%;
+    left: 60%;
+    width: 25%;
+    height: 8%; */
+}
+.yanzheng
+{
+    line-height:30px;
+}
+.Login-wrapper .form-wrapper .input-item::placeholder{
+    text-transform:uppercase;
+}
+.form-control::placeholder
+{
+    text-transform:uppercase;
+}
+.Login-wrapper .form-wrapper .btn {
+    text-align:center;
+    padding:5px;
+    width:100%;
+    margin-top:40px;
+    background-image: linear-gradient(to right,#a6c1ee,#fbc2eb);
+    color:#ffffff;
+}
+.Login-wrapper .msg{
+    text-align:center;
+    line-height:80px;
+}
+.Login-wrapper .msg a{
+    text-decoration-line:none;
+    color:#a6c1ee;
+}
+.form-inline
+{
+    display: block;
+    white-space: nowrap;
+
+}
