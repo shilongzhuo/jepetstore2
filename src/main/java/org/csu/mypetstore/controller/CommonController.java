@@ -33,4 +33,9 @@ public class CommonController {
     public String infor(){
         return "usual/infor";
     }
+
+    @GetMapping("/login")
+    public String login(){
+        return "account/login";
+    }
 }

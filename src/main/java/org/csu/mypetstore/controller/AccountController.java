@@ -56,42 +56,36 @@ public class AccountController {
         }
     }
 
-    @PostMapping("/signon")
-    public String signon(Account account,String verification, Model model) {
-        System.out.println(account.getUsername()+account.getPassword()+verification);
-        if(verificationService.getVerificationCodeByUsername(account.getUsername())==null){//判断是否已经获得验证码
-            String message_login = "请先获得验证码";
-            model.addAttribute("message_login",message_login);
-            System.out.println(message_login);
-            return "account/login";
-        }else if(verificationService.getVerificationCodeByUsername(account.getUsername()).getCode()!=verification){//判断验证码是否正确
-            String message_login = "验证码错误";
-            model.addAttribute("message_login",message_login);
-            System.out.println(message_login);
-            return "account/login";
-        }else{//判断用户名密码是否正确
-            if(accountService.getAccount(account.getUsername(), account.getPassword()) == null) {
-                String message_login = "用户名或密码错误";
+    @GetMapping("/signon")
+    public String signon(Account account,String verification,String Fruit, Model model) {
+        if(Fruit.equals("User")){
+            if(verificationService.getVerificationCodeByUsername(account.getUsername())==null){//判断是否已经获得验证码
+                String message_login = "请先获得验证码";
                 model.addAttribute("message_login",message_login);
-                System.out.println(message_login);
+                return "account/login";
+            }else if(!verificationService.getVerificationCodeByUsername(account.getUsername()).getCode().equals(verification)){//判断验证码是否正确
+                System.out.println(verificationService.getVerificationCodeByUsername(account.getUsername()).getCode());
+                String message_login = "验证码错误";
+                model.addAttribute("message_login",message_login);
+                return "account/login";
+            }else{//判断用户名密码是否正确
+                if(accountService.getAccount(account.getUsername(), account.getPassword()) == null) {
+                    String message_login = "用户名或密码错误";
+                    model.addAttribute("message_login",message_login);
+                    return "account/login";
+                }
+                else {
+                    return "catalog/Catagory";
+                }
+            }
+        }else{
+            if(adminService.getAdmin(account.getUsername(),account.getPassword())!=null){
+                return "usual/index";
+            }else{
+                String message_login = "管理员用户名或密码错误";
+                model.addAttribute("message_login",message_login);
                 return "account/login";
             }
-            else {
-                return "catalog/Catagory";
-            }
-        }
-    }
-
-    @PostMapping("/signonAdmin")
-    public String signonAdmin(Account account, Model model){
-        System.out.println(account.getUsername()+account.getPassword());
-        if(adminService.getAdmin(account.getUsername(),account.getPassword())!=null){
-            return "usual/index";
-        }else{
-            String message_login = "管理员用户名或密码错误";
-            model.addAttribute("message_login",message_login);
-            System.out.println(message_login);
-            return "account/login";
         }
     }
 
