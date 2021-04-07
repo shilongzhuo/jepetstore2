@@ -5,7 +5,7 @@
 <div th:replace="cart/IncludeMyList"></div>
 
 <div id="BackLink">
-    <a href="main">Return to Main Menu</a>
+    <a href="/catalog/view">Return to Main Menu</a>
 </div>
 
 <div id="Catalog">
@@ -26,45 +26,38 @@
                     <th>&nbsp;</th>
                 </tr>
 
-                <c:if test="${sessionScope.cart.numberOfItems == 0}">
                     <tr>
-                        <td colspan="8"><b>Your cart is empty.</b></td>
+                        <td colspan="8" th:if="${cart.size()} eq 0"><b>Your cart is empty.</b>
+                        </td>
                     </tr>
-                </c:if>
 
-                <c:forEach var="cartItem" items="${sessionScope.cart.cartItems}">
-                    <tr>
+                    <tr th:each="cartItem:${cart}">
                         <td>
-                            <a href="item?itemId=${cartItem.item.itemId}">${cartItem.item.itemId}</a>
+                            <a href="/viewItem?itemId=${cartItem.item.itemId}" th:text="${cartItem.item.itemId}">itemId</a>
                         </td>
-                        <td>
-                            ${cartItem.item.product.productId}
-                        </td>
-                        <td>
-                            ${cartItem.item.attribute1} ${cartItem.item.attribute2}
-                            ${cartItem.item.attribute3} ${cartItem.item.attribute4}
-                            ${cartItem.item.attribute5} ${cartItem.item.product.name}
-                        </td>
-                        <td>
-                            ${cartItem.inStock}
-                        </td>
+                        <td th:text="${cartItem.item.product.productId}">productId</td>
+                        <td th:text="${cartItem.item.attribute1}">attribute1</td>
+                        <td th:text="${cartItem.item.attribute2}">attribute2</td>
+                        <td th:text="${cartItem.item.attribute3}">attribute3</td>
+                        <td th:text="${cartItem.item.attribute4}">attribute4</td>
+                        <td th:text="${cartItem.item.attribute5}">attribute5</td>
+                        <td th:text="${cartItem.item.product.name}">productName</td>
+
+                        <td th:text="${cartItem.inStock}">inStock</td>
                         <td>
                             <input type="text" name="${cartItem.item.itemId}" id="${cartItem.item.itemId}" value="${cartItem.quantity}"
                                    onchange="update(this.id,this.value,${cartItem.item.listPrice})"/>
                         </td>
-                        <td>
-                            <fmt:formatNumber value="${cartItem.item.listPrice}"
-                                              pattern="$#,##0.00" />
-                        </td>
-                        <td id="${cartItem.item.itemId}total">
-                            <fmt:formatNumber value="${cartItem.total}"
-                                              pattern="$#,##0.00" />
-                        </td>
+                        <td th:text="${cartItem.item.listPrice}">listPrice</td>
+<!--                        <td id="${cartItem.item.itemId}total">-->
+<!--                            <fmt:formatNumber value="${cartItem.total}"-->
+<!--                                              pattern="$#,##0.00" />-->
+<!--                        </td>-->
+                        <td th:text="${cartItem.total}">total</td>
                         <td>
                             <a href="remove?workingItemId=${cartItem.item.itemId}" class="Button">Remove</a>
                         </td>
                     </tr>
-                </c:forEach>
                 <tr>
                     <td colspan="7">
                         <input id="updateCart" type="submit" value="Update Cart"/>
@@ -96,10 +89,13 @@
 
         </form>
 
-        <c:if test="${sessionScope.cart.numberOfItems > 0}">
-            <%--		<a href="orderForm" class="Button">Proceed to Checkout</a>--%>
-            <a href="cartCheck" class="Button">Proceed to Checkout</a>
-        </c:if>
+<!--        <c:if test="${sessionScope.cart.numberOfItems > 0}">-->
+<!--            <%&#45;&#45;		<a href="orderForm" class="Button">Proceed to Checkout</a>&#45;&#45;%>-->
+<!--            <a href="cartCheck" class="Button">Proceed to Checkout</a>-->
+<!--        </c:if>-->
+        <p th:if="${cart.size()} == 0">
+            <a href="/checkOut" class="Button">Proceed to Checkout</a>
+        </p>
     </div>
 
     <div id="Separator">&nbsp;</div>
