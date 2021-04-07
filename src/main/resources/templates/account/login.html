@@ -12,13 +12,11 @@
     <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
 </head>
 <body>
-<!--<script type="text/javascript" src="../js/login.js"></script>-->
 
 <div id="Catalog">
 
-    <form>
+    <form action="/account/signon" method="post">
         <div id="container">
-
             <div class="Login-wrapper">
                 <div class="header"> Login</div>
                 <div class="form-wrapper">
@@ -27,16 +25,20 @@
                     <div class="form-inline">
                         <input type="text" name="verification" placeholder="Verification" class="form-control" id = "verification"/>
                         <input type="button" id="getVerification" value="获取验证码"/><br/>
-                        <label><input name="Fruit" type="radio" value="" checked = "checked" id = "user"/>User </label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <label><input name="Fruit" type="radio" value=""  id = "admin"/>Admin </label>
+                        <label><input name="Fruit" type="radio" value="User" checked = "checked" id = "user"/>User </label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <label><input name="Fruit" type="radio" value="Admin"  id = "admin"/>Admin </label>
                     </div>
-                    <input name="signon" value="Login" class = "btn" id="check" />
+                    <table>
+                        <tr>
+                            <td id="inf" name="inf" th:text="${message_login}"></td>
+                        </tr>
+                    </table>
+                    <input  type="submit" name="signon" value="Login" class = "btn" id="check" />
                     <div class="msg">
-                        Don't have account? <a href="account/NewAccountForm">Sign up</a>
+                        Don't have account? <a href="NewAccountForm">Sign up</a>
                     </div>
                 </div>
             </div>
-
         </div>
 
     </form>

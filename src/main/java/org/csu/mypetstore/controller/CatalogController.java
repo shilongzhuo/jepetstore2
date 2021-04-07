@@ -20,7 +20,7 @@ public class CatalogController {
 
     @GetMapping("/view")
     public String view(){
-        return "catalog/main";
+        return "Main";
     }
 
     @GetMapping("/viewCategory")
@@ -30,10 +30,10 @@ public class CatalogController {
             List<Product> productList = catelogService.getProductListByCategory(categoryId);
             model.addAttribute("category",category);
             model.addAttribute("prductList",productList);
-            return "catalog/catagory";
+            return "Catagory";
         }
         else {
-            return "catalog/main";
+            return "Main";
         }
     }
 }
