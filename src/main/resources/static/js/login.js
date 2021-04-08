@@ -1,5 +1,7 @@
 window.onload = function() {
 
+    var ver = document.getElementById("getVerification");
+    ver.onclick = getVer;
     //单机获取验证码
     function getVer() {
         //选择的为user

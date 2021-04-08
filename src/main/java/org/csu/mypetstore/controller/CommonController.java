@@ -38,4 +38,9 @@ public class CommonController {
     public String login(){
         return "account/login";
     }
+
+    @GetMapping("/newAccount")
+    public String signon(){
+        return "account/NewAccountForm";
+    }
 }
