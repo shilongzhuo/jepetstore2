@@ -26,6 +26,7 @@ public class CartController {
 
     @GetMapping("/cart")
     public String cart(String username, Model model){
+        username = (String)model.getAttribute("username");
         if(username == null){
             return "account/login";
         }
@@ -43,6 +44,7 @@ public class CartController {
 
     @GetMapping("/viewItem")
     public String viewItem(String itemId, Model model) {
+
 
         return "";
     }
