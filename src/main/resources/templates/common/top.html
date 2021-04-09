@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+    <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
 </head>
 <body>
     <header th:fragment="header">
@@ -17,22 +18,12 @@
 
             <div id="Menu">
                 <div id="MenuContent">
-                    <a href="/cart"><img align="middle" name="img_cart" src="../images/cart.gif" /></a>
+                    <a href="cart"><img align="middle" name="img_cart" src="../images/cart.gif" /></a>
                     <img align="middle" src="../images/separator.gif" />
-<!--                    <c:if test="${sessionScope.accountId == null}">-->
-<!--                        <a href="loginForm">Sign In</a>-->
-<!--                    </c:if>-->
-<!--                    <c:if test="${sessionScope.accountId != null}">-->
-<!--                        <a href="signout">${sessionScope.accountId} Sign Out</a>-->
-<!--                        <img align="middle" src="../images/separator.gif" />-->
-<!--                        <a href="accountForm">My Account</a>-->
-<!--                        <img align="middle" src="../images/separator.gif" />-->
-<!--                    </c:if>-->
-                        <a href="loginForm">Sign In</a>
+                        <a href="/main/login" th:if="${session.account == null}" th:onshow="onshow">Sign In</a>
+                        <a href="/account/signout" th:if="${session.account != null}" th:onshow="onshow">Sign Out</a>
                         <img align="middle" src="../images/separator.gif" />
-                        <a href="signout">Sign Out</a>
-                        <img align="middle" src="../images/separator.gif" />
-                        <a href="accountForm">My Account</a>
+                        <a href="/account/getAccount">My Account</a>
                         <img align="middle" src="../images/separator.gif" />
                     <a href="help.html">?</a>
                 </div>

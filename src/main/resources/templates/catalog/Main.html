@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+    <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
 </head>
 <body>
     <div th:replace="common/top">
@@ -48,37 +49,11 @@
 
         <me-div id="message" style="text-align:center;position: fixed;border:1px solid #000;background-color: #f5f3e5;right: 13%;top: 190px;width: 230px;" >products information</me-div>
     </div>
-    <script>
-
-        function show(name){
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    var products = JSON.parse(this.responseText);
-                    var num=0,i=0;
-                    num=products.length;
-                    var show = "<table><tr><td>productID</td><td>name</td></tr>";
-                    for(i=0;i<num;i++){
-                        show += "<tr>";
-                        show += "<td>" + products[i]["id"] + "</td>" + "<td>" + products[i]["name"] + "</td>";
-                        show += "</tr>";
-                    }
-                    show += "</table>";
-                    $("#message").html(show);
-                    $("#message").height = num*30+"px";
-                }
-            };
-            xmlhttp.open("GET", "products?Category=" + name, true);
-            xmlhttp.send();
-        }
-
-        function hide(){
-            $("#message").text("products information");
-        }
-    </script>
 
     <div th:replace="common/bottom">
 
     </div>
+    <script src="../js/main.js" async defer></script>
+
 </body>
 </html>
