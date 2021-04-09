@@ -47,6 +47,7 @@ public class OrderService {
         for (int i = 0; i < order.getLineItems().size(); i++) {
             LineItem lineItem = (LineItem) order.getLineItems().get(i);
             lineItem.setOrderId(order.getOrderId());
+            lineItem.setLineNumber(getNextId("linenum"));
             lineItemMapper.insertLineItem(lineItem);
         }
     }

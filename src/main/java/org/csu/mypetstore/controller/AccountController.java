@@ -100,7 +100,6 @@ public class AccountController {
     @PostMapping("/newAccount")
     @ResponseBody
     public String newAccount(Account account,String verification,Model model){
-        System.out.println(account.getUsername()+account.getEmail()+account.getPassword()+verification);
         if(account.getPassword()!=""||account.getPassword()!=null||account.getUsername()!=""||account.getUsername()!=null||account.getEmail()!=""||account.getEmail()!=null){
             if(!verificationService.getVerificationCodeByUsername(account.getUsername()).getCode().equals(verification)){
                 model.addAttribute("message_new","验证码错误");

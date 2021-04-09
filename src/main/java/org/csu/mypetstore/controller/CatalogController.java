@@ -68,7 +68,6 @@ public class CatalogController {
     @PostMapping("/search")
     public String search(String keyword,Model model){
         model.addAttribute("productListSelect",catelogService.searchProductList("%"+keyword+"%"));
-        System.out.println(keyword);
         return  "catalog/SearchProducts";
     }
 }

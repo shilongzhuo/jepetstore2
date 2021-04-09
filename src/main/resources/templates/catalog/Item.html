@@ -37,8 +37,9 @@
         <tr>
             <td th:text="${item.listPrice}"><b>item.listPrice</b></td>
         </tr>
+
         <tr>
-            <td><input type="button" th:href="@{'/cart/addItem?itemId=' + ${item.itemId}}" value="添加到购物车"></td>
+            <td><a th:href="@{'/cart/addItem?itemId=' + ${item.itemId}}"><input type="button" value="添加到购物车"></a></td>
         </tr>
 
 

@@ -24,7 +24,7 @@
             cardtype,
             courier,
             creditCard,
-            exprdate as expireDate,
+            exprdate as expiryDate,
             locale,
             orderDate,
             orders.orderId,

@@ -21,30 +21,22 @@
             <td><b>Total Cost</b></td>
         </tr>
 
-        <c:forEach var="cartItem" items="${sessionScope.cart.cartItems}">
-            <tr>
-                <td>
-                    <a href="item?itemId= ${cartItem.item.itemId}"> ${cartItem.item.itemId}</a>
-                </td>
-                <td>${cartItem.item.product.productId}</td>
-                <td>${cartItem.item.attribute1} ${cartItem.item.attribute2}
-                    ${cartItem.item.attribute3} ${cartItem.item.attribute4}
-                    ${cartItem.item.attribute5} ${cartItem.item.product.name}</td>
-                <td>${cartItem.inStock}</td>
-                <td>${cartItem.quantity}</td>
-                <td><fmt:formatNumber value="${cartItem.item.listPrice}"
-                                      pattern="$#,##0.00" /></td>
-                <td><fmt:formatNumber value="${cartItem.total}"
-                                      pattern="$#,##0.00" /></td>
-            </tr>
-        </c:forEach>
+        <tr th:each="cartItem:${cart.cartItems}">
+            <td><a th:text="${cartItem.item.itemId}" th:href="@{'/catalog/viewItem?itemId=' + ${cartItem.item.itemId}}">cartItem.item.itemId</a></td>
+            <td th:text="${cartItem.item.product.productId}"></td>
+            <td th:text="${cartItem.item.attribute1}+${cartItem.item.product.name}"></td>
+            <td th:text="${cartItem.inStock}"></td>
+            <td th:text="${cartItem.quantity}"></td>
+            <td th:text="${cartItem.item.listPrice}"></td>
+            <td th:text="${cartItem.total}"></td>
+        </tr>
+
         <tr>
-            <td colspan="7">Sub Total: <fmt:formatNumber
-                    value="${sessionScope.cart.subTotal}" pattern="$#,##0.00" /></td>
+            <td colspan="7" th:text="'Sub Total:'+${cart.subTotal}">Sub Total</td>
         </tr>
     </table>
 
-    <a href="orderForm" class="Button">Proceed to Get Order</a>
+    <a href="/order/orderInf" class="Button">Proceed to Get Order</a>
 
 </div>
 
