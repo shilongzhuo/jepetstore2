@@ -219,20 +219,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div id = "buju">						
 						<div id = "shangpinguanli2">
 
+							<form action="/backstage/categoryRename" method="post">
 							<table class = "table">
 								<tr>
-									<th style ="text-align:center;">大类ID</th>
-									<th style="text-align: center">大类名称</th>
+									<th style ="text-align:center;">小类序列</th>
+									<th style="text-align: center">小类名称</th>
 								</tr>
-								<tr th:each="category, categoryStat:${categoryList}">
-									<td th:text="${categoryStat.index+1}">1</td>
-									<td th:text="${category}">商品大类</td>
+								<tr th:each="product, productStat:${productList}">
+									<td th:text="${productStat.index+1}">1</td>
+
+									<td><input type="text" name="newName" th:value="${product}"></td>
 									<td></td>
 									<td></td>
 									<td></td>
 									<td class="right">
-										<a href="/backstage/categoryRename" class="btn">rename</a>
-										<a href="/backstage/categoryRemove" class="btn">remove</a>
+										<input type="submit" value="改名" class="btn"/>
+<!--										<a href="/backstage/categoryRename" class="btn">rename</a>-->
+<!--										<a href="/backstage/categoryRemove" class="btn">remove</a>-->
 									</td>
 								</tr>
 								<tr>
@@ -246,9 +249,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</td>
 								</tr>
 							</table>
+							</form>
 						</div>
 				   </div>
-
     <script src="../js/bootstrap.min.js"></script>
 	<script src="../js/goods.js"></script>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->

@@ -222,7 +222,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
 		<div id="main1"></div>
 		
-		<script type="text/javascript">
+		<script type="text/javascript" th:inline="javascript">
+
+			var x = 3;
 			// 基于准备好的dom，初始化echarts实例
 			var myChart = echarts.init(document.getElementById('main1'));
 				// 基于准备好的dom，初始化echarts实例
@@ -244,7 +246,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					radius: '60%',
 					center: ['50%', '60%'],
 					data: [
-						{value: 1, name: '已售出'},
+						{value: x, name: '已售出'},
 						{value: 3, name: '已下单'},
 						{value: 7, name: '未售出'},
 					],

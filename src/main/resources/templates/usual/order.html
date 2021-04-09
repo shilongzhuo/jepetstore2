@@ -230,7 +230,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<th style ="  text-align:center;">Total Price</th>
 			</tr>
 			<tr th:each="order, orderStat:${orderList}">
-				<td th:text="${order.getOrderId()}"><a href = "#">订单id</a></td>
+				<td th:text="${order.getOrderId()}">订单id</td>
 				<td th:text="${order.getUsername()}">用户姓名</td>
 				<td th:text="${order.getOrderDate()}">订单确定时间</td>
 				<td th:text="${order.getTotalPrice()}">总价格</td>
