@@ -16,6 +16,7 @@ public class BlogService {
 
     //查询日志
     public List<Blog> getBlogByUsername(String username){
+        System.out.println(username + blogMapper.getBlogByUsername(username).size());
         return blogMapper.getBlogByUsername(username);
     }
 
