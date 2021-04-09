@@ -3,6 +3,7 @@ package org.csu.mypetstore;
 import org.csu.mypetstore.domain.Account;
 import org.csu.mypetstore.domain.Admin;
 import org.csu.mypetstore.domain.Category;
+import org.csu.mypetstore.domain.Item;
 import org.csu.mypetstore.persistence.AccountMapper;
 import org.csu.mypetstore.service.AccountService;
 import org.csu.mypetstore.service.AdminService;
@@ -22,6 +23,8 @@ class MypetstoreApplicationTests {
 
     @Autowired
     AdminService adminService;
+    @Autowired
+    CatelogService catelogService;
 
 
     @Test
@@ -34,6 +37,7 @@ class MypetstoreApplicationTests {
 
 //        List<String>  list = accountMapper.getAccountList();
 //       int b;
+        Item item = catelogService.getItem("EST-18");
 
     }
 

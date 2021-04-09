@@ -72,6 +72,10 @@ public class OrderService {
         return orderMapper.getOrdersByUsername(username);
     }
 
+    public List<Order> getAllOrders(){
+        return orderMapper.getAllOrders();
+    }
+
     //获得下一个订单编号
     public int getNextId(String name) {
         Sequence sequence = new Sequence(name, -1);

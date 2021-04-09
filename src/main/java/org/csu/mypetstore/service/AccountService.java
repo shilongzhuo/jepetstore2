@@ -42,6 +42,8 @@ public class AccountService {
         accountMapper.updateAccount(account);
         accountMapper.updateProfile(account);
 
+        System.out.println(account.getPassword());
+
         if (account.getPassword() != null && account.getPassword().length() > 0) {
             //对用户密码进行加密
             account.setPassword(MD5Util.md5(account.getPassword()));

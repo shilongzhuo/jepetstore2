@@ -1,6 +1,5 @@
 package org.csu.mypetstore.controller;
 
-import org.bouncycastle.math.raw.Mod;
 import org.csu.mypetstore.domain.Account;
 import org.csu.mypetstore.service.AccountService;
 import org.csu.mypetstore.service.AdminService;
@@ -9,10 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/account")
-@SessionAttributes
+@SessionAttributes({"username","account"})
 public class AccountController {
 
     @Autowired
@@ -66,12 +69,11 @@ public class AccountController {
                 model.addAttribute("message_login",message_login);
                 return "account/login";
             }else if(!verificationService.getVerificationCodeByUsername(account.getUsername()).getCode().equals(verification)){//判断验证码是否正确
-                System.out.println(verificationService.getVerificationCodeByUsername(account.getUsername()).getCode());
                 String message_login = "验证码错误";
                 model.addAttribute("message_login",message_login);
                 return "account/login";
             }else{//判断用户名密码是否正确
-                verificationService.delVerificationCodeByUsername(account.getUsername());
+                //verificationService.delVerificationCodeByUsername(account.getUsername());
                 if(accountService.getAccount(account.getUsername(), account.getPassword()) == null) {
                     String message_login = "用户名或密码错误";
                     model.addAttribute("message_login",message_login);
@@ -79,7 +81,8 @@ public class AccountController {
                 }
                 else {
                     model.addAttribute("account",accountService.getAccount(account.getUsername(), account.getPassword()));
-                    return "catalog/Catagory";
+                    model.addAttribute("username",account.getUsername());
+                    return "catalog/Main";
                 }
             }
         }else{
@@ -122,6 +125,45 @@ public class AccountController {
             return "用户名已存在";
         }else{
             return "用户名可以使用";
+        }
+    }
+
+    //获得用户信息
+    @GetMapping("/getAccount")
+    public String getAccount(Model model, HttpSession session){
+        if(session.getAttribute("account")!=null){
+            model.addAttribute("account",session.getAttribute("account"));
+            return "account/EditAccountForm";
+        }else{
+            return "account/login";
+        }
+    }
+
+    //获得用户信息
+    @GetMapping("/signout")
+    public String signout(HttpSession session,SessionStatus sessionStatus){
+        session.invalidate();
+        sessionStatus.setComplete();
+        return "catalog/Main";
+    }
+
+    //修改用户信息
+    @PostMapping("/updataAccount")
+    public String updataAccount(Account account,String repeatedPassword,Model model){
+        if(account.getPassword()!=""||repeatedPassword!=""||!account.getPassword().equals("")||!repeatedPassword.equals("")){
+            if(!account.getPassword().equals(repeatedPassword)){
+                model.addAttribute("amsg","两次输入的密码不同");
+                return "account/EditAccountForm";
+            }else{
+                accountService.updateAccount(account);
+                model.addAttribute("amsg","修改密码和用户信息成功");
+                return "account/EditAccountForm";
+            }
+        }else{
+            account.setPassword("");
+            accountService.updateAccount(account);
+            model.addAttribute("amsg","修改用户信息成功");
+            return "account/EditAccountForm";
         }
     }
 

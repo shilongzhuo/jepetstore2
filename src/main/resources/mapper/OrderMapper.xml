@@ -69,7 +69,40 @@
             and orders.orderId = orderStatus.orderid
         order by orderDate
     </select>
-    
+
+    <select id="getAllOrders" resultType="Order">
+         select
+            billaddr1 as billAddress1,
+            billaddr2 as billAddress2,
+            billCity,
+            billCountry,
+            billState,
+            billToFirstName,
+            billToLastName,
+            billZip,
+            shipaddr1 as shipAddress1,
+            shipaddr2 as shipAddress2,
+            shipCity,
+            shipCountry,
+            shipState,
+            shipToFirstname,
+            shipToLastName,
+            shipZip,
+            cardtype,
+            courier,
+            creditCard,
+            exprdate as expireDate,
+            locale,
+            orderDate,
+            orders.orderId,
+            totalPrice,
+            userId as username,
+            status
+        from orders, orderStatus
+        where orders.orderId = orderStatus.orderid
+        order by orderDate
+    </select>
+
     <insert id="insertOrder" parameterType="Order">
         insert into orders(
             orderId,

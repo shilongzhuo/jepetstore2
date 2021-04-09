@@ -89,7 +89,11 @@ public class CatelogService {
     }
 
     public List<Item> getItemListByProduct(String productID){
-        return itemMapper.getItemListByProduct(productID);
+        List<Item> itemList = itemMapper.getItemListByProduct(productID);
+        for(int i=0;i<itemList.size();i++){
+            itemList.get(i).setProductId(itemList.get(i).getProduct().getProductId());
+        }
+        return itemList;
     }
 
     public Item getItem(String itemID){
