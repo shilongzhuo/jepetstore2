@@ -50,6 +50,23 @@
     font-size: 30px;
 }
 
+#buju #shangpinguanli3
+{
+    height: 80%;
+    width: 90%;
+    margin-top: 0px;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    left: 5%;
+    top: 14%;
+    bottom: 6%;
+    right: 5%;
+    border: 1px solid gray;
+    background-color: white;
+    line-height: 60px;
+    font-size: 20px;
+}
 
 .ul1{
     list-style-type:none;

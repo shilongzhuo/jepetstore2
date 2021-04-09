@@ -105,4 +105,8 @@ public class OrderService {
     public int getSoledItemQuantityByItemId(String itemId){
         return orderMapper.getSoldItemQuantityByItemId(itemId);
     }
+
+    public List<Order> getOrder(){
+        return null;
+    }
 }

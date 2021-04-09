@@ -1,6 +1,6 @@
 <!--商品管理-->
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Shows</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -221,71 +221,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 							<table class = "table">
 								<tr>
-									<th style ="text-align:center;">商品管理</th>
+									<th style ="text-align:center;">大类ID</th>
+									<th style="text-align: center">大类名称</th>
 								</tr>
-								<tr>
-									<td>1</td>         
-									<td><a href="/catalog/viewCategory?categoryId=FISH" class = "lianjie1">Fish</a></td>
+								<tr th:each="category, categoryStat:${categoryList}">
+									<td th:text="${categoryStat.index+1}">1</td>
+									<td th:text="${category}">商品大类</td>
 									<td></td>
 									<td></td>
 									<td></td>
 									<td class="right">
 										<a href="/backstage/categoryRename" class="btn">rename</a>
-										<button class="btn">rename</button>
-										&nbsp;&nbsp;
-										<button class="btn btn-error">remove</button>
-									</td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td><a href="/catalog/viewCategory?categoryId=DOGS" class = "lianjie1">Dogs</a></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td class="right">
-										<a href="/backstage/categoryRename" class="btn">rename</a>
-										<button class="btn">rename</button>
-										&nbsp;&nbsp;
-										<button class="btn btn-error">remove</button>
-									</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td><a href="/catalog/viewCategory?categoryId=REPTILES" class = "lianjie1">Reptiles</a></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td class="right">
-										<a href="/backstage/categoryRename" class="btn">rename</a>
-										<button class="btn">rename</button>
-										&nbsp;&nbsp;
-										<button class="btn btn-error">remove</button>
-									</td>
-								</tr>
-								<tr>
-									<td>4</td>
-									<td><a href="/catalog/viewCategory?categoryId=CATS" class = "lianjie1">Cats</a></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td class="right">
-										<a href="/backstage/categoryRename" class="btn">rename</a>
-										<button class="btn">rename</button>
-										&nbsp;&nbsp;
-										<button class="btn btn-error">remove</button>
-									</td>
-								</tr>
-								<tr>
-									<td>5</td>
-									<td><a href="/catalog/viewCategory?categoryId=BIRDS" class = "lianjie1">Birds</a></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td class="right">
-										<a href="/backstage/categoryRename" class="btn">rename</a>
-										<button class="btn">rename</button>
-										&nbsp;&nbsp;
-										<button class="btn btn-error">remove</button>
+										<a href="/backstage/categoryRemove" class="btn">remove</a>
 									</td>
 								</tr>
 								<tr>
