@@ -73,7 +73,7 @@ public class AccountController {
                 model.addAttribute("message_login",message_login);
                 return "account/login";
             }else{//判断用户名密码是否正确
-                //verificationService.delVerificationCodeByUsername(account.getUsername());
+                verificationService.delVerificationCodeByUsername(account.getUsername());
                 if(accountService.getAccount(account.getUsername(), account.getPassword()) == null) {
                     String message_login = "用户名或密码错误";
                     model.addAttribute("message_login",message_login);
