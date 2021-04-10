@@ -11,6 +11,10 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @SpringBootTest
@@ -31,10 +35,13 @@ class MypetstoreApplicationTests {
 
     @Test
     void ServiceTest(){
-        List<Order> orderList = orderService.getAllOrders();
-
-        System.out.println(orderList.size());
-
+        Date currentTime = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = formatter.format(currentTime);
+        ParsePosition pos = new ParsePosition(8);
+        Date currentTime_2 = formatter.parse(dateString, pos);
+        Order order = new Order(3, "es", currentTime_2, "Changsha", "Beijing", "USA", "China", "sef", "sef", "@sef", "@fs3f", "England", "123", "Chenchou", "123", "fesf", new BigDecimal(3), "ert", "yui", "xcv", "sef", "sefs", "sef", "3s", "sef", "sef");
+        orderService.insertOrder(order);
 
     }
 

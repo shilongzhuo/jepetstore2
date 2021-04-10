@@ -41,6 +41,35 @@ public class Order implements Serializable {
     public Order() {
     }
 
+    public Order(int orderId, String username, Date orderDate, String shipAddress1, String shipAddress2, String shipCity, String shipState, String shipZip, String shipCountry, String billAddress1, String billAddress2, String billCity, String billState, String billZip, String billCountry, String courier, BigDecimal totalPrice, String billTOFirstName, String billToLastName, String shipToFirstName, String shipToLastName, String creditCard, String expiryDate, String cardType, String locale, String status) {
+        this.orderId = orderId;
+        this.username = username;
+        this.orderDate = orderDate;
+        this.shipAddress1 = shipAddress1;
+        this.shipAddress2 = shipAddress2;
+        this.shipCity = shipCity;
+        this.shipState = shipState;
+        this.shipZip = shipZip;
+        this.shipCountry = shipCountry;
+        this.billAddress1 = billAddress1;
+        this.billAddress2 = billAddress2;
+        this.billCity = billCity;
+        this.billState = billState;
+        this.billZip = billZip;
+        this.billCountry = billCountry;
+        this.courier = courier;
+        this.totalPrice = totalPrice;
+        this.billTOFirstName = billTOFirstName;
+        this.billToLastName = billToLastName;
+        this.shipToFirstName = shipToFirstName;
+        this.shipToLastName = shipToLastName;
+        this.creditCard = creditCard;
+        this.expiryDate = expiryDate;
+        this.cardType = cardType;
+        this.locale = locale;
+        this.status = status;
+    }
+
     public int getOrderId() {
         return orderId;
     }

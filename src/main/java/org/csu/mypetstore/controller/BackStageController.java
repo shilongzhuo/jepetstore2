@@ -29,8 +29,8 @@ public class BackStageController {
     @Autowired
     OrderService orderService;
 
-    @RequestMapping("/categoryRename")
-    public String categoryRename(Model model, @RequestParam("newName") String newName) {
+    @PostMapping("/categoryRename")
+    public String categoryRename(Model model, String oldName, String newName) {
 
         // 更新小类名称
 

@@ -218,11 +218,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 				<div id = "buju">						
 						<div id = "shangpinguanli2">
-
-							<form action="/backstage/categoryRename" method="post">
 							<table class = "table">
 								<tr>
-									<th style ="text-align:center;">小类序列</th>
+									<th style="text-align:center;">小类序列</th>
 									<th style="text-align: center">小类名称</th>
 								</tr>
 								<tr th:each="product, productStat:${productList}">
@@ -233,9 +231,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<td></td>
 									<td></td>
 									<td class="right">
-										<input type="submit" value="改名" class="btn"/>
-<!--										<a href="/backstage/categoryRename" class="btn">rename</a>-->
-<!--										<a href="/backstage/categoryRemove" class="btn">remove</a>-->
+										<a href="/backstage/categoryRename" class="btn">rename</a>
+										<a href="/backstage/categoryRemove" class="btn">remove</a>
 									</td>
 								</tr>
 								<tr>
@@ -249,9 +246,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</td>
 								</tr>
 							</table>
-							</form>
 						</div>
 				   </div>
+	<script type="text/javascript">
+		function rename(oldName, newName){
+			$.post({
+				"oldName": oldName,
+				"newName": newName
+			})
+		}
+	</script>
     <script src="../js/bootstrap.min.js"></script>
 	<script src="../js/goods.js"></script>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
