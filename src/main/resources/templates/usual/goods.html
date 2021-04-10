@@ -230,8 +230,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<td></td>
 									<td></td>
 									<td></td>
-									<td class="right">
-										<a href="/backstage/categoryRename" class="btn">rename</a>
+									<td class="right" id="rightTD">
+										<a href="#" class="btn removeBtn" th:id="${product.productId}">rename</a>
 										<a href="/backstage/categoryRemove" class="btn">remove</a>
 									</td>
 								</tr>
@@ -249,12 +249,47 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 				   </div>
 	<script type="text/javascript">
-		function rename(oldName, newName){
-			$.post({
-				"oldName": oldName,
-				"newName": newName
-			})
-		}
+		$('.removeBtn').on('click', (e) => {
+			console.log('log');
+			e.preventDefault();
+			console.log($(this).parent('#rightTD'));
+
+			let oldProductId = document.getElementsByClassName('removeBtn')[0].getAttribute('id')
+
+			$.ajax({
+				type:"POST",
+				url:"/backstage/categoryRename",
+				data:{
+					"oldProductId": "AV-CB-01",
+					"newName": "newName"
+				},
+				success:function(){
+					console.log("success");
+				}
+			});
+		})
+
+
+		// function rename(oldProductId, newName){
+		// 	console.log('.log');
+		// 	let param = {
+		// 		"oldProductId": oldProductId,
+		// 		"newName": newName
+		// 	}
+		// 	$.post('backstage/categoryRename', param, () => {
+		// 		console.log("success");
+		// 	});
+		// 	// $.ajax({
+		// 	// 	type:"POST",
+		// 	// 	url:"categoryRename",
+		// 	// 	data:{
+		// 	// 		"oldProductId": oldProductId,
+		// 	// 		"newName": newName
+		// 	// 	},
+		// 	// 	success:function(){
+		// 	// 		console.log("success");
+		// 	// 	}
+		// 	// });
 	</script>
     <script src="../js/bootstrap.min.js"></script>
 	<script src="../js/goods.js"></script>

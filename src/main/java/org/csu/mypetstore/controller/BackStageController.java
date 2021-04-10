@@ -29,11 +29,14 @@ public class BackStageController {
     @Autowired
     OrderService orderService;
 
+
     @PostMapping("/categoryRename")
-    public String categoryRename(Model model, String oldName, String newName) {
+    public String categoryRename(String oldProductId, String newName, Model model) {
 
         // 更新小类名称
-
+        Product product = catelogService.getProduct(oldProductId);
+        product.setName(newName);
+        catelogService.updateProduct(product);
 
         // 读取数据库，查询商品大类
         List<Category> categoryList = catelogService.getCategoryList();
