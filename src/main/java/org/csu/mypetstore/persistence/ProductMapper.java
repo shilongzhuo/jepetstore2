@@ -21,4 +21,6 @@ public interface ProductMapper {
      void delProductByProductId(String productId);
 
      void delProductByCategoryId(String categoryId);
+
+     List<Product> getAllProducts();
 }

@@ -64,4 +64,8 @@
     <delete id="delProductByCategoryId" parameterType="string">
         delete from product where category = #{categoryId}
     </delete>
+
+    <select id="getAllProducts" resultType="Product">
+        select * from product
+    </select>
 </mapper>

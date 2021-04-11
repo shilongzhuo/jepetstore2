@@ -82,6 +82,10 @@ public class CatelogService {
         itemMapper.delItemByProductId(productId);
     }
 
+    public List<Product> getAllProducts(){
+        return productMapper.getAllProducts();
+    }
+
     //商品的增删改查
 
     public int getInventoryQuantity(String itemId){

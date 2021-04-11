@@ -2,14 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
-    <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+    <title>MyPetstore</title>
 </head>
+<div th:replace="common/top"></div>
 <body>
-    <div th:replace="common/top">
-
-    </div>
 
     <div id="Main">
         <div id="Welcome">
@@ -35,19 +31,17 @@
         <div id="MainImage">
             <div id="MainImageContent">
                 <map name="estoremap">
-                    <area id="Birds" alt="Birds" coords="72,2,280,250" href="/catalog/viewCategory?categoryId=BIRDS" shape="rect" onmouseover="show(this.alt.toUpperCase())" onmouseleave="hide()" />
-                    <area id="Fish" alt="Fish" coords="2,180,72,250" href="/catalog/viewCategory?categoryId=FISH" shape="rect" onmouseover="show(this.alt.toUpperCase())" onmouseleave="hide()"/>
-                    <area id="Dogs" alt="Dogs" coords="60,250,130,320" href="/catalog/viewCategory?categoryId=DOGS" shape="rect" onmouseover="show(this.alt.toUpperCase())" onmouseleave="hide()"/>
-                    <area id="Reptiles" alt="Reptiles" coords="140,270,210,340" href="/catalog/viewCategory?categoryId=REPTILES" shape="rect" onmouseover="show(this.alt.toUpperCase())" onmouseleave="hide()"/>
-                    <area id="Cats" alt="Cats" coords="225,240,295,310" href="/catalog/viewCategory?categoryId=CATS" shape="rect" onmouseover="show(this.alt.toUpperCase())" onmouseleave="hide()"/>
-                    <area id="Birds2" alt="Birds" coords="280,180,350,250" href="/catalog/viewCategory?categoryId=BIRDS" shape="rect" onmouseover="show(this.alt.toUpperCase())" onmouseleave="hide()"/>
+                    <area id="Birds" alt="Birds" coords="72,2,280,250" href="/catalog/viewCategory?categoryId=BIRDS" shape="rect"  />
+                    <area id="Fish" alt="Fish" coords="2,180,72,250" href="/catalog/viewCategory?categoryId=FISH" shape="rect" />
+                    <area id="Dogs" alt="Dogs" coords="60,250,130,320" href="/catalog/viewCategory?categoryId=DOGS" shape="rect" />
+                    <area id="Reptiles" alt="Reptiles" coords="140,270,210,340" href="/catalog/viewCategory?categoryId=REPTILES" />
+                    <area id="Cats" alt="Cats" coords="225,240,295,310" href="/catalog/viewCategory?categoryId=CATS" shape="rect" />
+                    <area id="Birds2" alt="Birds" coords="280,180,350,250" href="/catalog/viewCategory?categoryId=BIRDS" shape="rect" />
                 </map>
                 <img height="355" src="../images/splash.gif" align="middle" usemap="#estoremap" width="350" />
             </div>
         </div>
         <div id="Separator">&nbsp;</div>
-
-        <me-div id="message" style="text-align:center;position: fixed;border:1px solid #000;background-color: #f5f3e5;right: 13%;top: 190px;width: 230px;" >products information</me-div>
     </div>
 
     <div th:replace="common/bottom">

@@ -1,0 +1,40 @@
+{
+    "version":"1.0.0",
+    "model":"model.moc",
+    "textures":[
+        "textures/texture_00.png"
+    ],
+    "layout":{
+        "center_x":0.0,
+		"center_y":-0.05,
+		"width":2.0
+    },
+    "hit_areas_custom":{
+        "head_x":[-0.35, 0.6],
+        "head_y":[0.19, -0.2],
+        "body_x":[-0.3, -0.25],
+        "body_y":[0.3, -0.9]
+    },
+    "motions":{
+        "idle":
+			{ "file": "motions/idle.mtn","fade_in":0, "fade_out":0 ,"cv_id":1},
+		"sleepy":
+            { "file":"motions/008.mtn"},
+        "flick_body":[
+            { "file":"motions/002.mtn"},
+			{ "file":"motions/005.mtn"},
+			{ "file":"motions/007.mtn"},
+			{ "file":"motions/009.mtn"},
+			{ "file":"motions/012.mtn"}
+        ],
+        "tap_head":
+            { "file": "motions/020.mtn"},
+		"":[
+			{ "file":"motions/003.mtn"},
+			{ "file":"motions/004.mtn"},
+			{ "file":"motions/006.mtn"},
+			{ "file":"motions/010.mtn"},
+			{ "file":"motions/011.mtn"}
+		]
+    }
+}

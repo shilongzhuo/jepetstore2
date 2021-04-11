@@ -6,6 +6,9 @@ body {
     color: #333;
     background-color: #444;
     position: relative;
+    height: 80vh;
+    cursor: url(../images/pointer.cur),
+    auto;
 }
 
 pre {

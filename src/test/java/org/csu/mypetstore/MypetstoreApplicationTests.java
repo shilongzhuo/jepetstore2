@@ -25,6 +25,8 @@ class MypetstoreApplicationTests {
     AdminService adminService;
     @Autowired
     CatelogService catelogService;
+    @Autowired
+    AccountService accountService;
 
 
     @Test
@@ -33,11 +35,9 @@ class MypetstoreApplicationTests {
 
     @Test
     void ServiceTest(){
-        Admin admin = adminService.getAdmin("admin","123456");
-
 //        List<String>  list = accountMapper.getAccountList();
 //       int b;
-        Item item = catelogService.getItem("EST-18");
+        System.out.println(accountService.getAccount("123"));
 
     }
 

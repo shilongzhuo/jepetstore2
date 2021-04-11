@@ -106,6 +106,9 @@ public class AccountController {
                 return "验证码错误";
             }else{
                 account.setLanguagePreference("english");
+                account.setListOption(false);
+                account.setBannerOption(false);
+                account.setFavouriteCategoryId("CATS");
                 accountService.insertAccount(account);
                 model.addAttribute("message_new","注册用户成功");
                 verificationService.delVerificationCodeByUsername(account.getUsername());
