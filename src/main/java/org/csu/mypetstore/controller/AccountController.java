@@ -34,7 +34,7 @@ public class AccountController {
             model.addAttribute("message_ver",message_ver);
             return message_ver;
         }else{
-           // verificationService.creatVerificationCodeByUsername(account.getUsername());
+            verificationService.creatVerificationCodeByUsername(account.getUsername());
             String email = accountService.getAccount(account.getUsername()).getEmail();
             email = email.replace(email.substring(2,email.indexOf('@')-2),"*******");
             String message_ver = "已向 "+email+" 发送验证码";
@@ -107,6 +107,9 @@ public class AccountController {
                 return "验证码错误";
             }else{
                 account.setLanguagePreference("english");
+                account.setListOption(false);
+                account.setBannerOption(false);
+                account.setFavouriteCategoryId("CATS");
                 accountService.insertAccount(account);
                 model.addAttribute("message_new","注册用户成功");
                 verificationService.delVerificationCodeByUsername(account.getUsername());

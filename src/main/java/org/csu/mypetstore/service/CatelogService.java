@@ -66,6 +66,9 @@ public class CatelogService {
         return productMapper.searchProductList(keywords);
     }
 
+    public List<Product> getAllProducts(){
+        return productMapper.getAllProducts();
+    }
     @Transactional
     public void insertProduct(Product product){
         productMapper.insertProduct(product);

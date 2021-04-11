@@ -39,20 +39,8 @@ public class CommonController {
     @GetMapping("/goods")
     public String goods(Model model) {
 
-        // 读取数据库，查询商品大类
-        List<Category> categoryList = catelogService.getCategoryList();
-        int num = categoryList.size();
-
-        List<Product> productList = new ArrayList<>();
-        // 根据大类获取所有小类
-        for(int i = 0; i < num; i++) {
-            List<Product> productList1 = catelogService.getProductListByCategory(categoryList.get(i).getName());
-            for(int j = 0; j < productList1.size(); j++){
-                productList.add(productList1.get(j));
-            }
-        }
+        List<Product> productList = catelogService.getAllProducts();
         model.addAttribute("productList", productList);
-
 
         return "usual/goods";
     }
