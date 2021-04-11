@@ -1,6 +1,6 @@
 <!--用户管理-->
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>History</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -213,91 +213,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 
 					  <div id = "buju">						
-						<div id = "shangpinguanli2">
+						<div id = "shangpinguanli3">
 					<table class="table">
 						<tr>
-							<th style ="  text-align:center;">ID</th>
-							<th style ="  text-align:center;">Users</th>
-							<th style ="  text-align:center;">Password</th>
-							<th style ="  text-align:center;">Phone</th>
-							<th style ="  text-align:center;">Email</th>
-							<th style ="  text-align:center;">Address</th>
-							<th style ="  text-align:center;">Country</th>
-							<th style ="  text-align:center;">Order</th>
-							<th style ="  text-align:center;"></th>
+							<th style ="text-align:center;">ID</th>
+							<th style ="text-align:center;">Username</th>
+							<th style ="text-align:center;">Email</th>
+							<th style ="text-align:center;">Firstname</th>
+							<th style ="text-align:center;">Lastname</th>
+							<th style ="text-align:center;">Phone</th>
+							<th style ="text-align:center;"></th>
 						</tr>
-						<tr>
-							<td>1</td>
+						<tr th:each="account, accountStat:${accountList}">
+							<td th:text="${accountStat.index+1}">userId</td>
+							<td th:text="${account.username}">用户名</td>
+							<td><abbr th:title="${account.email}">邮箱</abbr></td>
+							<td th:text="${account.firstName}">Firstname</td>
+							<td th:text="${account.lastName}">Lastname</td>
+							<td th:text="${account.phone}">电话</td>
+<!--							<td>-->
+<!--								<a href="/backstage/userRename" class="btn">rename</a>-->
+<!--							</td>-->
 							<td>
-								<h5>zsl</h5>
+								<a href="#" class="btn" th:name="${account.username}" onclick="remove(this.name)">remove</a>
 							</td>
-							<td>111</td>
-							<td>111</td>
-							<td>111@qq.com</td>
-							<td>Henan</td>
-							<td>China</td>
-							<td><a href = "#">111</a></td>
-							<td>
-								<button class="btn btn-error userRemove">remove</button>
-							</td>
-							<td>
-								<button class="Change btn">change</button>
-							</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>
-								<h5>zsl</h5>
-							</td>
-							<td>111</td>
-							<td>111</td>
-							<td>111@qq.com</td>
-							<td>Henan</td>
-							<td>China</td>
-							<td><a href = "#">111</a></td>
-							<td>
-								<button class="btn btn-error userRemove">remove</button>
-							</td>
-							<td>
-								<button class="Change btn">change</button>
-							</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>
-								<h5>zsl</h5>
-							</td>
-							<td>111</td>
-							<td>111</td>
-							<td>111@qq.com</td>
-							<td>Henan</td>
-							<td>China</td>
-							<td><a href = "#">111</a></td>
-							<td>
-								<button class="btn btn-error userRemove">remove</button>
-							</td>
-							<td>
-								<button class="Change btn">change</button>
-							</td>
-						</tr>
-						<tr>
-							<td>4</td>
-							<td>
-								<h5>zsl</h5>
-							</td>
-							<td>111</td>
-							<td>111</td>
-							<td>111@qq.com</td>
-							<td>Henan</td>
-							<td>China</td>
-							<td><a href = "#">111</a></td>
-							<td>
-								<button class="btn btn-error userRemove">remove</button>
-							</td>
-							<td>
-								<button class="Change btn">change</button>
-							</td>
-							
 						</tr>
 						<tr>
 							<td></td>
@@ -312,6 +251,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</table>
 					</div>
 				</div>
+	<script type="text/javascript">
+		function remove(userId){
+			$.ajax({
+				type: "POST",
+				url: "/backstage/userRemove",
+				data: {
+					"userId": userId
+				},
+				success: function () {
+					console.log("success");
+				}
+			});
+		}
+	</script>
 <script src = "../js/users.js"></script>
   </body>
 </html>

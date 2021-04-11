@@ -36,7 +36,7 @@ public class CatelogService {
 
     @Transactional
     public void insertCategory(Category category){
-       categoryMapper.insertCategory(category);
+        categoryMapper.insertCategory(category);
     }
 
     @Transactional
@@ -66,6 +66,9 @@ public class CatelogService {
         return productMapper.searchProductList(keywords);
     }
 
+    public List<Product> getAllProducts(){
+        return productMapper.getAllProducts();
+    }
     @Transactional
     public void insertProduct(Product product){
         productMapper.insertProduct(product);
@@ -80,10 +83,6 @@ public class CatelogService {
     public void delProductByProductId(String productId){
         productMapper.delProductByProductId(productId);
         itemMapper.delItemByProductId(productId);
-    }
-
-    public List<Product> getAllProducts(){
-        return productMapper.getAllProducts();
     }
 
     //商品的增删改查

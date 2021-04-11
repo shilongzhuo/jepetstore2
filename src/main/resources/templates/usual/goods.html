@@ -231,8 +231,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<td></td>
 				<td></td>
 				<td class="right" id="rightTD">
-					<a href="#" class="btn removeBtn" th:name="${product.productId}" onclick="rename(this.name)">rename</a>
-					<a href="/backstage/categoryRemove" class="btn">remove</a>
+					<a href="#" class="btn" th:name="${product.productId}" onclick="rename(this.name)">rename</a>
+					<a href="#" class="btn" th:name="${product.productId}" onclick="remove(this.name)">remove</a>
 				</td>
 			</tr>
 			<tr>
@@ -256,10 +256,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 		$.ajax({
 			type: "POST",
-			url: "/catalog/categoryRename",
+			url: "/backstage/categoryRename",
 			data: {
 				"oldProductId": oldProductId,
 				"newName": $("#"+oldProductId).val()
+			},
+			success: function () {
+				console.log("success");
+			}
+		});
+	}
+	function remove(productId){
+		$.ajax({
+			type: "POST",
+			url: "/backstage/categoryRemove",
+			data: {
+				"productId": productId,
 			},
 			success: function () {
 				console.log("success");

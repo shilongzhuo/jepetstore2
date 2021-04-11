@@ -1,6 +1,6 @@
 <!--订单管理-->
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Sports</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -224,84 +224,56 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div id = "shangpinguanli2">
 		<table class="table">
 			<tr>
-				<th style ="  text-align:center;">OrderID</th>
-				<th style ="  text-align:center;">User</th>
-				<th style ="  text-align:center;">Address</th>
-				<th style ="  text-align:center;">Amount</th>
-				<th style ="  text-align:center;">State</th>
-				<th style ="  text-align:center;">Date</th>
+				<th style ="  text-align:center;">Order ID</th>
+				<th style ="  text-align:center;">User ID</th>
+				<th style ="  text-align:center;">Order Date</th>
+				<th style ="  text-align:center;">Total Price</th>
+				<th style ="  text-align:center;">Shipping status</th>
 			</tr>
-			<tr>
-				<td><a href = "#">111</a></td>
+			<tr th:each="order, orderStat:${orderList}">
+				<td th:text="${order.getOrderId()}">订单id</td>
+				<td th:text="${order.getUsername()}">用户姓名</td>
+				<td th:text="${order.getOrderDate()}">订单确定时间</td>
+				<td th:text="${order.getTotalPrice()}">总价格</td>
+				<td th:if="${order.getStatus()} eq 'n'" th:text="未发货">已发货</td>
+				<td th:if="${order.getStatus()} eq 'y'" th:text="已发货">未发货</td>
 				<td>
-					<h5>zsl</h5>
-				</td>
-				<td>Henan</td>
-				<td>$100</td>
-				<td>shiped</td>
-				<td>11.7</td>
-				<td>
-					<button class="btn btn-error userRemove">remove</button>
+					<a href="#" class="btn" th:name="${order.orderId}" onclick="remove(this.name)">remove</a>
 				</td>
 				<td>
-					<button class="btn deliver">deliver</button>
+					<a href="#" class="btn" th:name="${order.orderId}" onclick="deliver(this.name)">deliver</a>
 				</td>
-				
-			</tr>
-			<tr>
-				<td><a href = "#">111</a></td>
-				<td>
-					<h5>zsl</h5>
-				</td>
-				<td>Henan</td>
-				<td>$100</td>
-				<td>shiped</td>
-				<td>11.7</td>
-				<td>
-					<button class="btn btn-error userRemove">remove</button>
-				</td>
-				<td>
-					<button class="btn deliver">deliver</button>
-				</td>
-				
-			</tr>
-			<tr>
-				<td><a href = "#">111</a></td>
-				<td>
-					<h5>zsl</h5>
-				</td>
-				<td>Henan</td>
-				<td>$100</td>
-				<td>shiped</td>
-				<td>11.7</td>
-				<td>
-					<button class="btn btn-error userRemove">remove</button>
-				</td>
-				<td>
-					<button class="btn deliver">deliver</button>
-				</td>
-				
-			</tr>
-			<tr>
-				<td><a href = "#">111</a></td>
-				<td>
-					<h5>zsl</h5>
-				</td>
-				<td>Henan</td>
-				<td>$100</td>
-				<td>shiped</td>
-				<td>11.7</td>
-				<td>
-					<button class="btn btn-error userRemove">remove</button>
-				</td>
-				<td>
-					<button class="btn deliver">deliver</button>
-				</td>
-				
 			</tr>
 		</table>
 		</div>
 	</div>
+	<script type="text/javascript">
+		function remove(orderId) {
+
+			$.ajax({
+				type: "POST",
+				url: "/backstage/orderRemove",
+				data: {
+					"orderId": orderId
+				},
+				success: function () {
+					console.log("success");
+				}
+			});
+		}
+		function deliver(orderId) {
+			$.ajax({
+				type: "POST",
+				url: "/backstage/orderDeliver",
+				data: {
+					"orderId": orderId
+				},
+				success: function () {
+					console.log("success");
+				}
+			});
+		}
+	</script>
     <script src="../js/bootstrap.min.js"></script>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
   </body>

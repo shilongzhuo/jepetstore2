@@ -49,12 +49,18 @@ public class AccountService {
         }
     }
 
-    public List<Account> geAccountList(){
+    public List<Account> getAccountList(){
         List<Account> accountList = new ArrayList<Account>();
         List<String> accountNameList = accountMapper.getAccountList();
         for (int i=0;i<accountNameList.size();i++){
             accountList.add(accountMapper.getAccountByUsername(accountNameList.get(i)));
         }
         return accountList;
+    }
+
+    // 删除用户
+    @Transactional
+    public void deleteAccount(String userId){
+        accountMapper.deleteAccount(userId);
     }
 }

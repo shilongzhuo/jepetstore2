@@ -25,4 +25,6 @@ public interface AccountMapper {
     void updateSignon(Account account);
 
     List<String> getAccountList();
+
+    void deleteAccount(String userId);
 }
