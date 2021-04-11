@@ -58,29 +58,44 @@ public class BackStageController {
     @GetMapping("/userRename")
     public String accountRename(String accountName, String newName, Model model){
         // 向数据库查询所有用户信息
-        List<Account> accountList = accountService.geAccountList();
+        List<Account> accountList = accountService.getAccountList();
         model.addAttribute("accountList", accountList);
         return "usual/users";
     }
 
-    @GetMapping("/userRemove")
-    public String accountRemove(Model model){
+    @PostMapping("/userRemove")
+    public String accountRemove(String userId, Model model){
+
+        // 删除用户
+        accountService.deleteAccount(userId);
         // 向数据库查询所有用户信息
-        List<Account> accountList = accountService.geAccountList();
+        List<Account> accountList = accountService.getAccountList();
         model.addAttribute("accountList", accountList);
         return "usual/users";
     }
 
-    @GetMapping("/orderRemove")
-    public String orderRemove(Model model){
+    @PostMapping("/orderRemove")
+    public String orderRemove(String orderId, Model model){
+
+        // 删除订单
+        orderService.delOrderByOrderId(orderId);
         // 向数据库查询所有订单信息
         List<Order> orderList = orderService.getAllOrders();
         model.addAttribute("orderList", orderList);
         return "usual/order";
     }
 
-    @GetMapping("/orderDeliver")
-    public String orderDeliver(Model model){
+    @PostMapping("/orderDeliver")
+    public String orderDeliver(int orderId, Model model){
+
+        // 若未发货，则设置成已发货
+        System.out.println(orderId);
+        Order order = orderService.getOrder(orderId);
+        if (order.getStatus().equals("n")){
+            order.setStatus("y");
+            orderService.updateOrderStatus(order);
+        }
+
         // 向数据库查询所有订单信息
         List<Order> orderList = orderService.getAllOrders();
         model.addAttribute("orderList", orderList);

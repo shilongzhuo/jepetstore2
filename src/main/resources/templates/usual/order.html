@@ -228,22 +228,52 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<th style ="  text-align:center;">User ID</th>
 				<th style ="  text-align:center;">Order Date</th>
 				<th style ="  text-align:center;">Total Price</th>
+				<th style ="  text-align:center;">Shipping status</th>
 			</tr>
 			<tr th:each="order, orderStat:${orderList}">
 				<td th:text="${order.getOrderId()}">订单id</td>
 				<td th:text="${order.getUsername()}">用户姓名</td>
 				<td th:text="${order.getOrderDate()}">订单确定时间</td>
 				<td th:text="${order.getTotalPrice()}">总价格</td>
+				<td th:if="${order.getStatus()} eq 'n'" th:text="未发货">已发货</td>
+				<td th:if="${order.getStatus()} eq 'y'" th:text="已发货">未发货</td>
 				<td>
-					<a href="/backstage/orderRemove" class="btn">remove</a>
+					<a href="#" class="btn" th:name="${order.orderId}" onclick="remove(this.name)">remove</a>
 				</td>
 				<td>
-					<a href="/backstage/orderDeliver" class="btn">deliver</a>
+					<a href="#" class="btn" th:name="${order.orderId}" onclick="deliver(this.name)">deliver</a>
 				</td>
 			</tr>
 		</table>
 		</div>
 	</div>
+	<script type="text/javascript">
+		function remove(orderId) {
+
+			$.ajax({
+				type: "POST",
+				url: "/backstage/orderRemove",
+				data: {
+					"orderId": orderId
+				},
+				success: function () {
+					console.log("success");
+				}
+			});
+		}
+		function deliver(orderId) {
+			$.ajax({
+				type: "POST",
+				url: "/backstage/orderDeliver",
+				data: {
+					"orderId": orderId
+				},
+				success: function () {
+					console.log("success");
+				}
+			});
+		}
+	</script>
     <script src="../js/bootstrap.min.js"></script>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
   </body>

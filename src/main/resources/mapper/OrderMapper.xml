@@ -204,7 +204,6 @@
     <update id="updateOrderStatus" parameterType="Order">
         update orderStatus set
             orderId = #{orderId},
-            linenum = #{LineItems.size()},
             timestamp = #{orderDate},
             status = #{status}
         where orderId = #{orderId}

@@ -59,7 +59,7 @@ public class Order implements Serializable {
         this.billCountry = billCountry;
         this.courier = courier;
         this.totalPrice = totalPrice;
-        this.billTOFirstName = billTOFirstName;
+        this.billToFirstName = billTOFirstName;
         this.billToLastName = billToLastName;
         this.shipToFirstName = shipToFirstName;
         this.shipToLastName = shipToLastName;

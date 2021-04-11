@@ -31,6 +31,8 @@ class MypetstoreApplicationTests {
 
     @Autowired
     AccountService accountService;
+    @Autowired
+    AccountMapper accountMapper;
 
     @Test
     void contextLoads() {
@@ -38,8 +40,10 @@ class MypetstoreApplicationTests {
 
     @Test
     void ServiceTest(){
-        System.out.println(accountService.getAccount("liuxin"));
-
+        Order order = orderService.getOrder(1010);
+        order.setStatus("y");
+        orderService.updateOrderStatus(order);
+        System.out.println(order.getStatus());
     }
 
 }

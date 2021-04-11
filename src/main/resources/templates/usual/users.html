@@ -226,16 +226,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</tr>
 						<tr th:each="account, accountStat:${accountList}">
 							<td th:text="${accountStat.index+1}">userId</td>
-							<td th:text="${account.getUsername()}">用户名</td>
-							<td><abbr th:title="${account.getEmail()}">邮箱</abbr></td>
-							<td th:text="${account.getFirstName()}">Firstname</td>
-							<td th:text="${account.getLastName()}">Lastname</td>
-							<td th:text="${account.getPhone()}">电话</td>
+							<td th:text="${account.username}">用户名</td>
+							<td><abbr th:title="${account.email}">邮箱</abbr></td>
+							<td th:text="${account.firstName}">Firstname</td>
+							<td th:text="${account.lastName}">Lastname</td>
+							<td th:text="${account.phone}">电话</td>
+<!--							<td>-->
+<!--								<a href="/backstage/userRename" class="btn">rename</a>-->
+<!--							</td>-->
 							<td>
-								<a href="/backstage/userRename" class="btn">rename</a>
-							</td>
-							<td>
-								<a href="/backstage/userRemove" class="btn">remove</a>
+								<a href="#" class="btn" th:name="${account.username}" onclick="remove(this.name)">remove</a>
 							</td>
 						</tr>
 						<tr>
@@ -251,6 +251,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</table>
 					</div>
 				</div>
+	<script type="text/javascript">
+		function remove(userId){
+			$.ajax({
+				type: "POST",
+				url: "/backstage/userRemove",
+				data: {
+					"userId": userId
+				},
+				success: function () {
+					console.log("success");
+				}
+			});
+		}
+	</script>
 <script src = "../js/users.js"></script>
   </body>
 </html>

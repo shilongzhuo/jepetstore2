@@ -49,7 +49,7 @@ public class CommonController {
     public String users(Model model){
 
         // 向数据库查询所有用户信息
-        List<Account> accountList = accountService.geAccountList();
+        List<Account> accountList = accountService.getAccountList();
         model.addAttribute("accountList", accountList);
         return "usual/users";
     }

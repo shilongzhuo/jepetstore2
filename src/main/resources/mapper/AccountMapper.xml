@@ -146,4 +146,10 @@
             username
         from signon
     </select>
+
+    <delete id="delAccountByUserId" parameterType="string">
+        SET SQL_SAFE_UPDATES = 0,
+        delete from account where userid = #{userId},
+        delete from signon where username = #{userId}
+    </delete>
 </mapper>
