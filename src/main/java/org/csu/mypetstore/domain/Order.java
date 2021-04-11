@@ -27,7 +27,7 @@ public class Order implements Serializable {
     private String billCountry;
     private String courier;
     private BigDecimal totalPrice;
-    private String billTOFirstName;
+    private String billToFirstName;
     private String billToLastName;
     private String shipToFirstName;
     private String shipToLastName;
@@ -206,12 +206,12 @@ public class Order implements Serializable {
         this.totalPrice = totalPrice;
     }
 
-    public String getBillTOFirstName() {
-        return billTOFirstName;
+    public String getBillToFirstName() {
+        return billToFirstName;
     }
 
-    public void setBillTOFirstName(String billTOFirstName) {
-        this.billTOFirstName = billTOFirstName;
+    public void setBillToFirstName(String billTOFirstName) {
+        this.billToFirstName = billTOFirstName;
     }
 
     public String getBillToLastName() {

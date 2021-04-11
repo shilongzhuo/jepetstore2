@@ -1,34 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
 
+<body>
 <div th:replace="common/top"></div>
 
+<div id="Catalog">
 <table>
     <tr>
         <th>Date</th>
         <th>log</th>
     </tr>
 
-    <c:forEach var="dailyLog" items="${sessionScope.dailyLogList}">
-        <tr>
-            <td>
-                <fmt:formatDate value="${dailyLog.date}" pattern="yyyy/MM/dd hh:mm:ss" />
-            </td>
-            <td>
-                <c:if test="${dailyLog.item}">
-                    view item: <a href="item?itemId=${dailyLog.log}">${dailyLog.log}</a>
-                </c:if>
-                <c:if test="${dailyLog.order}">
-                    place an order: <a href="orderViewForm?orderId=${Integer.valueOf(dailyLog.log)}">${dailyLog.log}</a>
-                </c:if>
-                <c:if test="${!dailyLog.item&&!dailyLog.order}">
-                    ${dailyLog.log}
-                </c:if>
-            </td>
-        </tr>
-    </c:forEach>
+    <tr th:each="blog:${blogList}">
+        <td th:text="${blog.orderDate}">blog.orderDate</td>
+        <td th:text="${blog.description}">blog.description</td>
+    </tr>
 </table>
+</div>
 
 <div th:replace="common/bottom"></div>
+</body>
 
 </html>

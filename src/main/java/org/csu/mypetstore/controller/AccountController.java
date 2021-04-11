@@ -73,7 +73,7 @@ public class AccountController {
                 model.addAttribute("message_login",message_login);
                 return "account/login";
             }else{//判断用户名密码是否正确
-                //verificationService.delVerificationCodeByUsername(account.getUsername());
+                verificationService.delVerificationCodeByUsername(account.getUsername());
                 if(accountService.getAccount(account.getUsername(), account.getPassword()) == null) {
                     String message_login = "用户名或密码错误";
                     model.addAttribute("message_login",message_login);
@@ -100,7 +100,6 @@ public class AccountController {
     @PostMapping("/newAccount")
     @ResponseBody
     public String newAccount(Account account,String verification,Model model){
-        System.out.println(account.getUsername()+account.getEmail()+account.getPassword()+verification);
         if(account.getPassword()!=""||account.getPassword()!=null||account.getUsername()!=""||account.getUsername()!=null||account.getEmail()!=""||account.getEmail()!=null){
             if(!verificationService.getVerificationCodeByUsername(account.getUsername()).getCode().equals(verification)){
                 model.addAttribute("message_new","验证码错误");

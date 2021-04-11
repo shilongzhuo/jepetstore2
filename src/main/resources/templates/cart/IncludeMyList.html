@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<c:if test="${sessionScope.account.listOption}">
-    <p>Pet Favorites <a href="category?categoryId=${sessionScope.account.favouriteCategoryId}">${sessionScope.account.favouriteCategoryId}</a><br />
+
+    <p style="position: relative;
+    right: 20px;
+    font-family: helvetica, tahoma, arial, verdana, sans-serif;
+    margin: 0ex 0ex 0ex 0ex;
+    padding: 2ex;
+    text-align: left;
+    width: 50%" th:if="${session.account.listOption}">Pet Favorites <a  th:text="${session.account.favouriteCategoryId}" th:href="@{'/catalog/viewCategory?categoryId=' + ${session.account.favouriteCategoryId}}">session.account.favouriteCategoryId</a><br />
         Shop for more of your favorite pets here.</p>
-    <%--	<ul>--%>
-    <%--		<c:forEach var="product" items="${sessionScope.myList}">--%>
-        <%--			<li>--%>
-            <%--				<a href="#?productId=${product.productId}">${product.name}</a>--%>
-            <%--			</li>--%>
-        <%--		</c:forEach>--%>
-    <%--	</ul>--%>
-</c:if>
 
 </html>

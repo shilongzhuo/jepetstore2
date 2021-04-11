@@ -1,108 +1,144 @@
 package org.csu.mypetstore.controller;
 
-import org.csu.mypetstore.domain.Account;
+
 import org.csu.mypetstore.domain.Cart;
-import org.csu.mypetstore.domain.CartItem;
-import org.csu.mypetstore.service.AccountService;
+import org.csu.mypetstore.domain.Item;
+import org.csu.mypetstore.domain.Product;
 import org.csu.mypetstore.service.CartService;
 import org.csu.mypetstore.service.CatelogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import javax.servlet.http.HttpSession;
 
 @Controller
+@RequestMapping("/cart")
 public class CartController {
 
     @Autowired
-    CartService cartService;
-    @Autowired
     CatelogService catelogService;
     @Autowired
-    AccountService accountService;
+    CartService cartService;
 
-    @GetMapping("/cart")
-    public String cart(String username, Model model){
-        username = (String)model.getAttribute("username");
-        if(username == null){
-            return "account/login";
+    //点击添加到购物车
+    @ResponseBody
+    @GetMapping(value = "/addItem")
+    public ModelAndView addItem(String itemId){
+        HttpSession session = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
+                .getRequest().getSession();
+        ModelAndView modelAndView;
+        if(catelogService.getItem(itemId)==null){
+            modelAndView = new ModelAndView("catalog/Main");
+        } else if (session.getAttribute("username")==null||session.getAttribute("usename")=="") {
+            modelAndView = new ModelAndView("account/login");
+        } else {
+            cartService.insertCartItem((String) session.getAttribute("username"), itemId);
+            modelAndView = new ModelAndView("catalog/Item");
+            Item item =  catelogService.getItem(itemId);
+            Product product = catelogService.getProduct(item.getProductId());
+            modelAndView.addObject("item",item);
+            modelAndView.addObject("product",product);
         }
-        else {
-            List<CartItem> cartList = cartService.getCartItemByUsername(username);
-            model.addAttribute("cart", cartList);
+        return modelAndView;
+    }
+
+    //点击购物车中的remove
+    @ResponseBody
+    @GetMapping("/removeItem")
+    public ModelAndView removeItem(String itemId){
+        HttpSession session = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
+                .getRequest().getSession();
+        ModelAndView modelAndView;
+        if (session.getAttribute("account")==null) {
+            modelAndView = new ModelAndView("catalog/Main");
+        } else if(cartService.getCartItemByUsernameAndItemId((String)session.getAttribute("username"),itemId)==null){
+            modelAndView = new ModelAndView("cart/Cart");
+            Cart cart = cartService.getCartByUsername((String)session.getAttribute("username"));
+            String message_cart = itemId + "已不在购物车中";
+            modelAndView.addObject("cart",cart);
+            modelAndView.addObject("message_cart",message_cart);
+        } else {
+
+            cartService.delCartItem((String) session.getAttribute("username"),itemId);
+            modelAndView = new ModelAndView("cart/Cart");
+            Cart cart = cartService.getCartByUsername((String)session.getAttribute("username"));
+            String message_cart = itemId + "从购物车删除成功";
+            modelAndView.addObject("cart",cart);
+            modelAndView.addObject("message_cart",message_cart);
+        }
+        return modelAndView;
+    }
+
+    //修改购物车中的商品数量
+    @ResponseBody
+    @PostMapping("/updateItem")
+    public ModelAndView updateItem(String cartItemId,int quantity){
+
+        System.out.println(cartItemId+quantity);
+
+        HttpSession session = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
+                .getRequest().getSession();
+        ModelAndView modelAndView;
+        if (session.getAttribute("account")==null) {
+            modelAndView = new ModelAndView("catalog/Main");
+        } else if(cartService.getCartItemByUsernameAndItemId((String)session.getAttribute("username"),cartItemId)==null){
+            modelAndView = new ModelAndView("cart/Cart");
+            Cart cart = cartService.getCartByUsername((String)session.getAttribute("username"));
+            String message_cart = cartItemId + "已不在购物车中";
+            modelAndView.addObject("cart",cart);
+            modelAndView.addObject("message_cart",message_cart);
+        } else {
+            if(quantity<=0){
+                cartService.delCartItem((String)session.getAttribute("username"),cartItemId);
+                modelAndView = new ModelAndView("cart/Cart");
+                Cart cart = cartService.getCartByUsername((String)session.getAttribute("username"));
+                String message_cart = cartItemId + "从购物车删除成功";
+                modelAndView.addObject("cart",cart);
+                modelAndView.addObject("message_cart",message_cart);
+            }else{
+                cartService.updateCartItem((String)session.getAttribute("username"),cartItemId,quantity);
+                modelAndView = new ModelAndView("cart/Cart");
+                Cart cart = cartService.getCartByUsername((String)session.getAttribute("username"));
+                String message_cart = cartItemId + "数量修改成功";
+                modelAndView.addObject("cart",cart);
+                modelAndView.addObject("message_cart",message_cart);
+            }
+        }
+        return modelAndView;
+    }
+
+
+    //跳转到购物车页面并查询购物车信息
+    @GetMapping("/viewCart")
+    public String viewCart(Model model,HttpSession session){
+        if (session.getAttribute("account")==null) {
+            String message_account = "登录信息缺失，请重新登陆";
+            model.addAttribute("message_account",message_account);
+            return "account/login";
+        } else{
+            Cart cart = cartService.getCartByUsername((String)session.getAttribute("username"));
+            model.addAttribute("cart",cart);
             return "cart/Cart";
         }
     }
 
-    @GetMapping("/checkOut")
-    public String checkOut(Model model){
-        return "cart/Checkout";
-    }
-
-    @GetMapping("/viewItem")
-    public String viewItem(String itemId, Model model) {
-
-
-        return "";
-    }
-
-    //点击添加到购物车
-    @GetMapping("/addItem")
-    public void addItem(String itemId, Model model){
-        if(catelogService.getItem(itemId)==null){
-            String message_add_item = itemId + "已经不再销售";
-            model.addAttribute("message_add_item",message_add_item);
-        } else if (model.getAttribute("username")==null) {
-            String message_add_item = "登录信息缺失，请重新登陆";
-            model.addAttribute("message_add_item",message_add_item);
-        } else {
-            cartService.insertCartItem((String) model.getAttribute("username"), itemId);
-            String message_add_item = itemId + "添加到购物车成功";
-            model.addAttribute("message_add_item", message_add_item);
+    //检查确认购物车信息
+    @GetMapping("/confirmCart")
+    public String confirmCart(Model model,HttpSession session){
+        if (session.getAttribute("account")==null) {
+            String message_account = "登录信息缺失，请重新登陆";
+            model.addAttribute("message_account",message_account);
+            return "account/login";
+        } else{
+            Cart cart = cartService.getCartByUsername((String)session.getAttribute("username"));
+            model.addAttribute("cart",cart);
+            return "cart/Checkout";
         }
     }
-
-    //点击购物车中的remove
-    @GetMapping("/removeItem")
-    public void removeItem(String itemId,Model model){
-        if (model.getAttribute("account")==null) {
-            String message_add_item = "登录信息缺失，请重新登陆";
-            model.addAttribute("message_update_item",message_add_item);
-        } else if(cartService.getCartItemByUsernameAndItemId((String)model.getAttribute("username"),itemId)==null){
-            String message_add_item = itemId + "已经不在购物车中";
-            model.addAttribute("message_update_item",message_add_item);
-        } else {
-            cartService.delCartItem((String)model.getAttribute("username"),itemId);
-            String message_add_item = itemId + "从购物车删除成功";
-            model.addAttribute("message_update_item", message_add_item);
-        }
-    }
-
-    //修改购物车中的商品数量
-    @GetMapping("/updateItem")
-    public void updateItem(String cartItemId,int quantity,Model model){
-        if (model.getAttribute("account")==null) {
-            String message_update_item = "登录信息缺失，请重新登陆";
-            model.addAttribute("message_update_item",message_update_item);
-        } else if(cartService.getCartItemByUsernameAndItemId((String)model.getAttribute("username"),cartItemId)==null){
-            String message_update_item = cartItemId + "已经不在购物车中";
-            model.addAttribute("message_update_item",message_update_item);
-        } else {
-            if(quantity<=0){
-                cartService.delCartItem((String)model.getAttribute("username"),cartItemId);
-                String message_update_item = cartItemId + "从购物车删除成功";
-                model.addAttribute("message_update_item", message_update_item);
-            }else{
-                cartService.updateCartItem((String)model.getAttribute("username"),cartItemId,quantity);
-                String message_update_item = cartItemId + "数量修改成功";
-                model.addAttribute("message_update_item", message_update_item);
-            }
-        }
-    }
-
-
 
 }
