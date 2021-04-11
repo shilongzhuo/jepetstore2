@@ -2,7 +2,7 @@ package org.csu.mypetstore.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class Order implements Serializable {
     private String billCountry;
     private String courier;
     private BigDecimal totalPrice;
-    private String billTOFirstName;
+    private String billToFirstName;
     private String billToLastName;
     private String shipToFirstName;
     private String shipToLastName;
@@ -39,6 +39,35 @@ public class Order implements Serializable {
     private List<LineItem> LineItems = new ArrayList<LineItem>();
 
     public Order() {
+    }
+
+    public Order(int orderId, String username, Date orderDate, String shipAddress1, String shipAddress2, String shipCity, String shipState, String shipZip, String shipCountry, String billAddress1, String billAddress2, String billCity, String billState, String billZip, String billCountry, String courier, BigDecimal totalPrice, String billTOFirstName, String billToLastName, String shipToFirstName, String shipToLastName, String creditCard, String expiryDate, String cardType, String locale, String status) {
+        this.orderId = orderId;
+        this.username = username;
+        this.orderDate = orderDate;
+        this.shipAddress1 = shipAddress1;
+        this.shipAddress2 = shipAddress2;
+        this.shipCity = shipCity;
+        this.shipState = shipState;
+        this.shipZip = shipZip;
+        this.shipCountry = shipCountry;
+        this.billAddress1 = billAddress1;
+        this.billAddress2 = billAddress2;
+        this.billCity = billCity;
+        this.billState = billState;
+        this.billZip = billZip;
+        this.billCountry = billCountry;
+        this.courier = courier;
+        this.totalPrice = totalPrice;
+        this.billToFirstName = billTOFirstName;
+        this.billToLastName = billToLastName;
+        this.shipToFirstName = shipToFirstName;
+        this.shipToLastName = shipToLastName;
+        this.creditCard = creditCard;
+        this.expiryDate = expiryDate;
+        this.cardType = cardType;
+        this.locale = locale;
+        this.status = status;
     }
 
     public int getOrderId() {
@@ -177,12 +206,12 @@ public class Order implements Serializable {
         this.totalPrice = totalPrice;
     }
 
-    public String getBillTOFirstName() {
-        return billTOFirstName;
+    public String getBillToFirstName() {
+        return billToFirstName;
     }
 
-    public void setBillTOFirstName(String billTOFirstName) {
-        this.billTOFirstName = billTOFirstName;
+    public void setBillToFirstName(String billTOFirstName) {
+        this.billToFirstName = billTOFirstName;
     }
 
     public String getBillToLastName() {

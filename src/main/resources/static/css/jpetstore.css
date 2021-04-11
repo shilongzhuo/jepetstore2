@@ -5,6 +5,7 @@ body {
     font-size: 2ex;
     color: #333;
     background-color: #444;
+    position: relative;
 }
 
 pre {
@@ -254,12 +255,13 @@ body>#Banner {
 
 #Main {
     margin: 0;
-    padding: 1ex;
+    padding: 8px;
     color: #333;
     background-color: #FFF;
     border-width: 1ex 0ex 2ex 0px;
     border-style: solid;
     border-color: #fff;
+    width: 98%;
 }
 
 #Sidebar {
@@ -276,9 +278,11 @@ body>#Banner {
 }
 
 #Catalog {
-    padding: 1ex;
+    padding: 1%;
     background:inherit;
     text-align:center;
+    background-color: white;
+    width: 97%;
 }
 
 #Catalog input[type="submit"]{
@@ -307,6 +311,8 @@ body>#Banner {
     border-width: .1ex 0ex .1ex 0px;
     border-style: solid;
     border-color: #000;
+    position: absolute;
+    right: 50px;
 }
 
 #Cart{

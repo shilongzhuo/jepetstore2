@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="common/top"></div>
+
+<div id="BackLink"><a href="cart">Return to Shopping Cart</a></div>
+
+<div id="Catalog">
+
+    <h2>Checkout Summary</h2>
+
+    <table>
+
+        <tr>
+            <td><b>Item ID</b></td>
+            <td><b>Product ID</b></td>
+            <td><b>Description</b></td>
+            <td><b>In Stock?</b></td>
+            <td><b>Quantity</b></td>
+            <td><b>List Price</b></td>
+            <td><b>Total Cost</b></td>
+        </tr>
+
+        <tr th:each="cartItem:${cart.cartItems}">
+            <td><a th:text="${cartItem.item.itemId}" th:href="@{'/catalog/viewItem?itemId=' + ${cartItem.item.itemId}}">cartItem.item.itemId</a></td>
+            <td th:text="${cartItem.item.product.productId}"></td>
+            <td th:text="${cartItem.item.attribute1}+${cartItem.item.product.name}"></td>
+            <td th:text="${cartItem.inStock}"></td>
+            <td th:text="${cartItem.quantity}"></td>
+            <td th:text="${cartItem.item.listPrice}"></td>
+            <td th:text="${cartItem.total}"></td>
+        </tr>
+
+        <tr>
+            <td colspan="7" th:text="'Sub Total:'+${cart.subTotal}">Sub Total</td>
+        </tr>
+    </table>
+
+    <a href="/order/orderInf" class="Button">Proceed to Get Order</a>
+
+</div>
+
+</html>

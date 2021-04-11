@@ -1,0 +1,98 @@
+
+#buju
+{
+    height: 100%;
+    width: 85%;
+    margin-top: 0px;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    left: 15%;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    border: 1px solid gray;
+}
+
+#buju #shangpinguanli1
+{
+    height: 8%;
+    width: 100%;
+    margin-top: 0px;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    border: 1px solid gray;
+    background-color: white;
+    line-height: 60px;
+    font-size: 30px;
+}
+#buju #shangpinguanli2
+{
+    height: 80%;
+    width: 90%;
+    margin-top: 0px;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    left: 5%;
+    top: 14%;
+    bottom: 6%;
+    right: 5%;
+    border: 1px solid gray;
+    background-color: white;
+    line-height: 60px;
+    font-size: 30px;
+}
+
+#buju #shangpinguanli3
+{
+    height: 80%;
+    width: 90%;
+    margin-top: 0px;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    left: 5%;
+    top: 14%;
+    bottom: 6%;
+    right: 5%;
+    border: 1px solid gray;
+    background-color: white;
+    line-height: 60px;
+    font-size: 20px;
+}
+
+.ul1{
+    list-style-type:none;
+}
+.ul1-li1
+{
+     
+}
+.ul1-img1{
+    height:20px;
+    width: 20px;
+}
+.ul1-img2
+{
+    height:100px;
+    width: 200px;
+}
+.table
+{
+    background-color:White; 
+    height:100%; 
+    width:100%;
+    text-align: center;
+    vertical-align:middle;
+}
+.btn
+{
+    background-color: rgb(44, 197, 231);
+}

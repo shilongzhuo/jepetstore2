@@ -11,4 +11,10 @@ public interface CategoryMapper {
     Category getCategory(String categoryId);
 
     List<Category> getCategoryList();
+
+    void insertCategory(Category category);
+
+    void updateCategory(Category category);
+
+    void delCategoryByCategoryId(String categoryId);
 }

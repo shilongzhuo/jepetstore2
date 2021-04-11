@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+
+<div th:replace="common/top"></div>
+
+<div id="Catalog">
+
+    <div id="BackLink">
+        <a href="/catalog/view">Return to Main Menu</a>
+    </div>
+
+<h2>My Orders</h2>
+
+<table>
+    <tr>
+        <th>Order ID</th>
+        <th>Date</th>
+        <th>Total Price</th>
+    </tr>
+
+    <tr th:each="order:${orderList}">
+        <td>
+            <a th:href="@{'/order/viewOrder?orderId=' + ${order.orderId}}" th:text="${order.orderId}">order.orderId</a>
+        </td>
+        <td th:text="${order.orderDate}">order.orderDate</td>
+        <td th:text="${order.totalPrice}">order.totalPrice</td>
+    </tr>
+</table>
+
+</div>
+
+
+<div th:replace="common/bottom"></div>
+
+</html>

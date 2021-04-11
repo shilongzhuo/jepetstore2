@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+
+<body>
+<div th:replace="common/top">
+
+</div>
+
+<div id="BackLink">
+    <a href="/catalog/view">Return to Main Menu</a>
+</div>
+
+<div id="Catalog">
+
+    <table>
+        <tr>
+            <td th:utext="${item.product.description}">item.product.description</td>
+        </tr>
+        <tr>
+            <td th:text="${item.itemId}"><b>item.itemId</b></td>
+        </tr>
+        <tr>
+            <td th:text="${item.attribute1} + ${item.product.name}"><b>item.description</b></td>
+        </tr>
+        <tr>
+            <td th:text="${item.product.name}"><b>item.product.name</b></td>
+        </tr>
+        <tr>
+            <td th:if="${item.quantity ge 1}"><b>In stock</b></td>
+            <td th:if="${item.quantity lt 1}"><b>Back ordered.</b></td>
+        </tr>
+        <tr>
+            <td th:text="${item.listPrice}"><b>item.listPrice</b></td>
+        </tr>
+
+        <tr>
+            <td><a th:href="@{'/cart/addItem?itemId=' + ${item.itemId}}"><input type="button" value="添加到购物车"></a></td>
+        </tr>
+
+
+    </table>
+
+</div>
+
+<div th:replace="common/bottom">
+
+</div>
+
+</body>
+</html>

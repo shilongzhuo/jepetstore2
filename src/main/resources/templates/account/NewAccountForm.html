@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/login.css">
+    <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+
+<div id="Catalog">
+
+    <form>
+        <div id="container">
+            <div class="Login-wrapper" style="height: 600px">
+                <div class="header"> Register</div>
+                <div class="form-wrapper">
+                    <input type="text" name="username" placeholder="Username" class="input-item" id = "username" />
+                    <input type="password" name="password" placeholder="Password" class="input-item" id = "password"/>
+                    <input type="password" name="passwordConfirm" placeholder="PasswordConfirm" class="input-item" id = "passwordConfirm"/>
+                    <input type="text" name="email" placeholder="Email" class="input-item" id = "email"/>
+                    <div class="form-inline">
+                        <input type="text" name="verification" placeholder="Verification" class="form-control" id = "verification"/>
+                        <input type="button" id="getVerification" value="获取验证码"/><br/>
+                    </div>
+
+                    <table><tr><td id="inf" name="inf"></td></tr></table>
+
+                   <input name="signon" value="Login" class = "btn" id="check" />
+
+                    <div class="msg">
+                        Already have an account? <a href="/main/login">login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<script src="../js/newAccount.js" async defer></script>
+</body>
+</html>
+

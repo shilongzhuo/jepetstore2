@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.csu.mypetstore.persistence.BlogMapper">
+    <insert id="insertBlog" parameterType="Blog">
+        insert into blog(
+            username,
+            description,
+            orderDate
+        )
+        values (
+            #{username},
+            #{description},
+            #{orderDate}
+        )
+    </insert>
+
+    <select id="getBlogByUsername" parameterType="string" resultType="Blog">
+        select
+            username,
+            description,
+            orderDate
+        from blog
+        where username = #{username}
+    </select>
+</mapper>

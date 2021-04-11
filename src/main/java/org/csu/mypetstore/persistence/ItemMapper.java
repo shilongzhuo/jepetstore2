@@ -16,4 +16,12 @@ public interface ItemMapper {
     List<Item> getItemListByProduct(String productID);
 
     Item getItem(String itemID);
+
+    void insertItem(Item item);
+
+    void updateItem(Item item);
+
+    void delItemByItemId(String itemId);
+
+    void delItemByProductId(String productId);
 }

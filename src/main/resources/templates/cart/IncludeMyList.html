@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+    <p style="position: relative;
+    right: 20px;
+    font-family: helvetica, tahoma, arial, verdana, sans-serif;
+    margin: 0ex 0ex 0ex 0ex;
+    padding: 2ex;
+    text-align: left;
+    width: 50%" th:if="${session.account.listOption}">Pet Favorites <a  th:text="${session.account.favouriteCategoryId}" th:href="@{'/catalog/viewCategory?categoryId=' + ${session.account.favouriteCategoryId}}">session.account.favouriteCategoryId</a><br />
+        Shop for more of your favorite pets here.</p>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="common/top"></div>
+
+<div id="BackLink">
+    <a href="/cart/viewCart">Return to Main Menu</a>
+</div>
+
+<div id="Catalog">
+
+    <div th:replace="cart/IncludeMyList"></div>
+
+    <div id="Cart">
+
+        <h2>Shopping Cart</h2>
+        <form action="update" method="post">
+            <table>
+                <tr>
+                    <th><b>Item ID</b></th>
+                    <th><b>Product ID</b></th>
+                    <th><b>Description</b></th>
+                    <th><b>In Stock?</b></th>
+                    <th><b>Quantity</b></th>
+                    <th><b>List Price</b></th>
+                    <th><b>Total Cost</b></th>
+                    <th>&nbsp;</th>
+                </tr>
+
+                    <tr th:if="${#lists.size(cart.cartItemList) == 0}">
+                        <td colspan="8"><b>Your cart is empty.</b></td>
+                    </tr>
+
+                    <tr th:each="cartItem:${cart.cartItemList}">
+                        <td><a th:text="${cartItem.item.itemId}" th:href="@{'/catalog/viewItem?itemId=' + ${cartItem.item.itemId}}">cartItem.item.itemId</a></td>
+                        <td th:text="${cartItem.item.product.productId}"></td>
+                        <td th:text="${cartItem.item.attribute1}+${cartItem.item.product.name}"></td>
+                        <td th:text="${cartItem.inStock}"></td>
+                        <td>
+                            <input type="text" th:name="${cartItem.item.itemId}" th:id="${cartItem.item.itemId}" th:value="${cartItem.quantity}"
+                                   onchange="update(this.id,this.value)"/>
+                        </td>
+                        <td th:text="${cartItem.item.listPrice}"></td>
+                        <td th:text="${cartItem.total}"   th:id="${cartItem.item.itemId}+'total'"></td>
+                        <td>
+                            <a th:href="@{'/cart/removeItem?itemId=' + ${cartItem.item.itemId}}" class="Button">Remove</a>
+                        </td>
+                    </tr>
+            </table>
+
+            <script>
+                function update(cartItemId,quantity) {
+
+                    var val = document.getElementById(cartItemId);
+                    quantity = val.value;
+
+                    if (quantity == "") {
+                        $("#" + cartItemId).val(0);
+                        quantity = 0;
+                    } else {
+                        $("#" + cartItemId).val(quantity);
+                    }
+
+                    $.post('/cart/updateItem',
+                        {
+                            'cartItemId':cartItemId,
+                            'quantity':quantity
+                        },function (data){
+                    })
+
+                }
+            </script>
+
+        </form>
+
+            <a th:if="${#lists.size(cart.cartItemList) != 0}" href="/cart/confirmCart" class="Button">Proceed to Checkout</a>
+
+    </div>
+
+    <div id="Separator">&nbsp;</div>
+</div>
+
+<div th:replace="common/bottom">
+</div>
+
+</html>

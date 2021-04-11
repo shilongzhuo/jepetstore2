@@ -1,38 +1,49 @@
 package org.csu.mypetstore;
 
-import org.csu.mypetstore.domain.Account;
-import org.csu.mypetstore.domain.Category;
+import org.csu.mypetstore.domain.*;
+import org.csu.mypetstore.persistence.AccountMapper;
 import org.csu.mypetstore.service.AccountService;
+import org.csu.mypetstore.service.AdminService;
 import org.csu.mypetstore.service.CatelogService;
+import org.csu.mypetstore.service.OrderService;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 @SpringBootTest
 @MapperScan("org.csu.mypetstore.persistence")
 class MypetstoreApplicationTests {
 
+
+    @Autowired
+    AdminService adminService;
     @Autowired
     CatelogService catelogService;
+    @Autowired
+    OrderService orderService;
 
     @Autowired
     AccountService accountService;
+    @Autowired
+    AccountMapper accountMapper;
+
     @Test
     void contextLoads() {
     }
 
     @Test
-    void test(){
-//        Category c = catelogService.getCategory("birds");
-//        System.out.println(c.getDescription());
-//        Account a = accountService.getAccount("ACID");
-//        System.out.println(a.getUsername()+","+a.getEmail()+","+a.getFirstName()+","+a.getLastName()+","+a.getStatus()
-//                +","+a.getAddress1()+","+a.getAddress2()+","+a.getCity()+","+a.getState()+","+a.getZip()+","+a.getCountry()+","+a.getPhone());
-        Account a = new Account();
-        a.setUsername("abc");
-        a.setPassword("ser");
-        accountService.insertAccount(a);
+    void ServiceTest(){
+        Order order = orderService.getOrder(1010);
+        order.setStatus("y");
+        orderService.updateOrderStatus(order);
+        System.out.println(order.getStatus());
     }
 
 }

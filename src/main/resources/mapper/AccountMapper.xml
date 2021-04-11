@@ -52,15 +52,15 @@
         from account, profile, signon,bannerdata
         where account.userId = #{param1}
             and signon.password = #{param2}
-            and sigon.userName = account.userId
+            and signon.userName = account.userId
             and profile.userId = account.userId
             and profile.favcategory = bannerData.favcategory
     </select>
     
-    <select id="updateAccount" parameterType="Account">
+    <update id="updateAccount" parameterType="Account">
         update account set
             email = #{email},
-            firstName = #{fistName},
+            firstName = #{firstName},
             lastName = #{lastName},
             status = #{status},
             addr1 = #{address1},
@@ -69,9 +69,9 @@
             state = #{state},
             zip = #{zip},
             country = #{country},
-            phone = #{phone},
+            phone = #{phone}
         where userId = #{username}
-    </select>
+    </update>
     
     <insert id="insertAccount" parameterType="Account">
         insert into account(
@@ -126,12 +126,12 @@
     
     <update id="updateSignon" parameterType="Account">
         update signon set
-            password = #{password},
-        where username #{username}
+            password = #{password}
+        where username = #{username}
     </update>
 
     <insert id="insertSignon" parameterType="Account">
-        insert into sigon(
+        insert into signon(
             password,
             username
         )
@@ -140,4 +140,16 @@
             #{username}
         )
     </insert>
+
+    <select id="getAccountList" resultType="string">
+        select distinct
+            username
+        from signon
+    </select>
+
+    <delete id="delAccountByUserId" parameterType="string">
+        SET SQL_SAFE_UPDATES = 0,
+        delete from account where userid = #{userId},
+        delete from signon where username = #{userId}
+    </delete>
 </mapper>
