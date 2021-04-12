@@ -1,9 +1,6 @@
 package org.csu.mypetstore;
 
-import org.csu.mypetstore.domain.Account;
-import org.csu.mypetstore.domain.Admin;
-import org.csu.mypetstore.domain.Category;
-import org.csu.mypetstore.domain.Item;
+import org.csu.mypetstore.domain.*;
 import org.csu.mypetstore.persistence.AccountMapper;
 import org.csu.mypetstore.service.AccountService;
 import org.csu.mypetstore.service.AdminService;
@@ -37,7 +34,9 @@ class MypetstoreApplicationTests {
     void ServiceTest(){
 //        List<String>  list = accountMapper.getAccountList();
 //       int b;
-        System.out.println(accountService.getAccount("123"));
+
+        Category category = catelogService.getCategory("DOGS");
+        List<Product> productList = catelogService.getProductListByCategory("DOGS");
 
     }
 
