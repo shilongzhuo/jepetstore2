@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
@@ -21,6 +22,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/order")
+@SessionAttributes("order")
 public class OrderController {
 
     @Autowired
@@ -117,8 +119,8 @@ public class OrderController {
             order.setCourier("East Wind");
             order.setTotalPrice(total);
             order.setLocale("china");
-            order.setStatus("p");
-            session.setAttribute("order",order);
+            order.setStatus("n");
+            model.addAttribute("order",order);
 
             return "order/ConfirmOrder";
         }
@@ -133,9 +135,9 @@ public class OrderController {
 
             //添加日志
             Blog blog = new Blog();
-            blog.setUsername((String)model.getAttribute("username"));
-            blog.setOrderDate(((Order) model.getAttribute("order")).getOrderDate());
-            blog.setDescription("creat order : "+((Order) model.getAttribute("order")).getOrderId());
+            blog.setUsername((String)session.getAttribute("username"));
+            blog.setOrderDate(((Order) session.getAttribute("order")).getOrderDate());
+            blog.setDescription("creat order : "+((Order) session.getAttribute("order")).getOrderId());
 
             model.addAttribute("order",(Order)session.getAttribute("order"));
             return "order/ViewOrder";

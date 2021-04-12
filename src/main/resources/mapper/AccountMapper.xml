@@ -29,7 +29,7 @@
             and profile.userId = account.userId
             and profile.favcategory = bannerdata.favcategory
     </select>
-    
+
     <select id="getAccountByUsernameAndPassword" parameterType="string" resultType="Account">
         select
             signon.username,
@@ -56,7 +56,7 @@
             and profile.userId = account.userId
             and profile.favcategory = bannerData.favcategory
     </select>
-    
+
     <update id="updateAccount" parameterType="Account">
         update account set
             email = #{email},
@@ -72,7 +72,7 @@
             phone = #{phone}
         where userId = #{username}
     </update>
-    
+
     <insert id="insertAccount" parameterType="Account">
         insert into account(
             email,
@@ -103,7 +103,7 @@
             #{username}
         )
     </insert>
-    
+
     <update id="updateProfile" parameterType="Account">
         update profile set
             langpref = #{languagePreference},
@@ -123,7 +123,7 @@
             #{username}
         )
     </insert>
-    
+
     <update id="updateSignon" parameterType="Account">
         update signon set
             password = #{password}

@@ -36,7 +36,7 @@ public class CatelogService {
 
     @Transactional
     public void insertCategory(Category category){
-       categoryMapper.insertCategory(category);
+        categoryMapper.insertCategory(category);
     }
 
     @Transactional

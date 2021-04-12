@@ -161,11 +161,9 @@
     <insert id="insertOrderStatus" parameterType="Order">
         insert into orderStatus(
             orderid,
-            lineNum,
             timeStamp,
             status)
         values(
-            #{orderId,jdbcType=NUMERIC},
             #{orderId,jdbcType=NUMERIC},
             #{orderDate,jdbcType=TIMESTAMP},
             #{status,jdbcType=VARCHAR})
