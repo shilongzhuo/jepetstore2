@@ -226,13 +226,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<tr th:each="product, productStat:${productList}">
 				<td th:text="${productStat.index+1}">1</td>
 
-				<td><input type="text" name="newName" th:value="${product}" th:id="${product.productId}"></td>
+				<td th:text="${product.name}" id="productName"></td>
 				<td></td>
 				<td></td>
 				<td></td>
 				<td class="right" id="rightTD">
-					<a href="#" class="btn" th:name="${product.productId}" onclick="rename(this.name)">rename</a>
-					<a href="#" class="btn" th:name="${product.productId}" onclick="remove(this.name)">remove</a>
+					<button class="btn" th:name="${product.productId}" onclick="rename(this.name)">rename</button>
+					<button class="btn" th:name="${product.productId}" onclick="remove(this.name)">remove</button>
 				</td>
 			</tr>
 			<tr>
@@ -252,32 +252,57 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 	function rename(oldProductId) {
 
+		// let x = document.getElementById("productName");
+		// console.log("=====" + x.firstChild.value + "-----");
+
+		var code = prompt("请输入新名称:", "newName");
+		console.log(code);
+		console.log(oldProductId);
+		if (code == "" || code == undefined){
+			alert("小类名称不能为空");
+		} else if(code == null){
+			console.log("点击取消");
+		} else {
+			$.ajax({
+				type: "POST",
+				url: "/backstage/categoryRename",
+				data: {
+					"oldProductId": oldProductId,
+					"newName": code
+				},
+				success: function () {
+					console.log("success");
+					document.getElementById("productName").textContent = code;
+					alert("修改成功");
+					// location.reload(true);
+				}
+			});
+		}
 		// var val = $("#"+oldProductId).val();
 
-		$.ajax({
-			type: "POST",
-			url: "/backstage/categoryRename",
-			data: {
-				"oldProductId": oldProductId,
-				"newName": $("#"+oldProductId).val()
-			},
-			success: function () {
-				console.log("success");
-			}
-		});
+
 	}
 	function remove(productId){
-		$.ajax({
-			type: "POST",
-			url: "/backstage/categoryRemove",
-			data: {
-				"productId": productId,
-			},
-			success: function () {
-				console.log("success");
-			}
-		});
+
+		if (confirm("确定要删除这个小类吗？")) {
+			$.ajax({
+				type: "POST",
+				url: "/backstage/categoryRemove",
+				data: {
+					"productId": productId,
+				},
+				success: function () {
+					console.log("success");
+					location.reload(true);
+					alert("删除成功");
+				}
+			});
+		} else {
+
+		}
+
 	}
+
 </script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/goods.js"></script>

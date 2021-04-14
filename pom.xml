@@ -76,6 +76,12 @@
             <version>1.11</version>
         </dependency>
 
+        <!-- 热更新插件 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -108,6 +114,7 @@
                 <version>2.3.7.RELEASE</version>
                 <configuration>
                     <mainClass>org.csu.mypetstore.MypetstoreApplication</mainClass>
+                    <fork>true</fork>
                 </configuration>
                 <executions>
                     <execution>

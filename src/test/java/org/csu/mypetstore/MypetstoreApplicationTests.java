@@ -11,6 +11,10 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @SpringBootTest
@@ -23,8 +27,12 @@ class MypetstoreApplicationTests {
     @Autowired
     CatelogService catelogService;
     @Autowired
-    AccountService accountService;
+    OrderService orderService;
 
+    @Autowired
+    AccountService accountService;
+    @Autowired
+    AccountMapper accountMapper;
 
     @Test
     void contextLoads() {
@@ -32,12 +40,10 @@ class MypetstoreApplicationTests {
 
     @Test
     void ServiceTest(){
-//        List<String>  list = accountMapper.getAccountList();
-//       int b;
-
-        Category category = catelogService.getCategory("DOGS");
-        List<Product> productList = catelogService.getProductListByCategory("DOGS");
-
+        Order order = orderService.getOrder(1010);
+        order.setStatus("y");
+        orderService.updateOrderStatus(order);
+        System.out.println(order.getStatus());
     }
 
 }
