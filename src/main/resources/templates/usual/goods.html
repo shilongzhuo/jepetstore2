@@ -40,7 +40,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<div class="header-top-right">
 				<div class="file">
-					<a href="upload.html">Upload</a>
+					<a href="/backstage/signOut">Sign Out</a>
 				</div>
 				<div class="signin">
 					<a href="#small-dialog2" class="play-icon popup-with-zoom-anim">Sign Up</a>
@@ -226,13 +226,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<tr th:each="product, productStat:${productList}">
 				<td th:text="${productStat.index+1}">1</td>
 
-				<td th:text="${product.name}" id="productName"></td>
+				<td th:text="${product.name}"></td>
 				<td></td>
 				<td></td>
 				<td></td>
 				<td class="right" id="rightTD">
-					<button class="btn" th:name="${product.productId}" onclick="rename(this.name)">rename</button>
-					<button class="btn" th:name="${product.productId}" onclick="remove(this.name)">remove</button>
+					<button class="btn" th:name="${product.productId}" th:id="${product.name}" onclick="rename(this.name, this.id)">rename</button>
+					<button class="btn" th:name="${product.productId}" onclick="remove(this.name)">sold out</button>
 				</td>
 			</tr>
 			<tr>
@@ -250,18 +250,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 <script type="text/javascript">
 
-	function rename(oldProductId) {
+	function rename(oldProductId, oldName) {
 
-		// let x = document.getElementById("productName");
-		// console.log("=====" + x.firstChild.value + "-----");
-
-		var code = prompt("请输入新名称:", "newName");
+		let code = prompt("请输入新名称:", oldName);
 		console.log(code);
-		console.log(oldProductId);
-		if (code == "" || code == undefined){
-			alert("小类名称不能为空");
-		} else if(code == null){
+		console.log(oldName);
+		if (oldName == code) {
+			console.log("名字未改变");
+		} else if (code == null || code == undefined){
 			console.log("点击取消");
+		} else if(code == ""){
+			console.log("输入空值");
+			alert("不能输入空值");
 		} else {
 			$.ajax({
 				type: "POST",
@@ -274,13 +274,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					console.log("success");
 					document.getElementById("productName").textContent = code;
 					alert("修改成功");
-					// location.reload(true);
 				}
 			});
 		}
-		// var val = $("#"+oldProductId).val();
-
-
 	}
 	function remove(productId){
 

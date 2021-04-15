@@ -46,7 +46,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<div class="header-top-right">
 				<div class="file">
-					<a href="/upload/upload">Upload</a>
+					<a href="/backstage/signOut">Sign Out</a>
 				</div>	
 				<div class="signin">
 					<a href="#small-dialog2" class="play-icon popup-with-zoom-anim">Sign Up</a>
@@ -217,13 +217,36 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	    <script src="../js/bootstrap.min.js"></script>
 
 		</div>
-		//饼状图绘制
+	    // 获取数据的隐藏域
+		<input type="hidden" th:value="${BirdList[0]}" id="Bird0">
+		<input type="hidden" th:value="${BirdList[1]}" id="Bird1">
+		<input type="hidden" th:value="${BirdList[2]}" id="Bird2">
+
+		<input type="hidden" th:value="${CatList[0]}" id="Cat0">
+		<input type="hidden" th:value="${CatList[1]}" id="Cat1">
+		<input type="hidden" th:value="${CatList[2]}" id="Cat2">
+
+		<input type="hidden" th:value="${DogList[0]}" id="Dog0">
+		<input type="hidden" th:value="${DogList[1]}" id="Dog1">
+		<input type="hidden" th:value="${DogList[2]}" id="Dog2">
+
+		<input type="hidden" th:value="${FishList[0]}" id="Fish0">
+		<input type="hidden" th:value="${FishList[1]}" id="Fish1">
+		<input type="hidden" th:value="${FishList[2]}" id="Fish2">
+
+		<input type="hidden" th:value="${ReptileList[0]}" id="Reptile0">
+		<input type="hidden" th:value="${ReptileList[1]}" id="Reptile1">
+		<input type="hidden" th:value="${ReptileList[2]}" id="Reptile2">
+		// 饼状图绘制
 		<div id = "main">
 		<script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
 		<div id="main1"></div>
 		
 		<script type="text/javascript" th:inline="javascript">
 
+			var soldout = document.getElementById('Fish0').value;
+			var unsold = document.getElementById('Fish1').value;
+			var ordered = document.getElementById('Fish2').value;
 			var x = 3;
 			// 基于准备好的dom，初始化echarts实例
 			var myChart = echarts.init(document.getElementById('main1'));
@@ -246,9 +269,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					radius: '60%',
 					center: ['50%', '60%'],
 					data: [
-						{value: x, name: '已售出'},
-						{value: 3, name: '已下单'},
-						{value: 7, name: '未售出'},
+						{value: soldout, name: '已售出'},
+						{value: ordered, name: '已下单'},
+						{value: unsold, name: '未售出'},
 					],
 					itemStyle: {
 						emphasis: {
@@ -266,6 +289,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</script>
 		<div id="main2"></div>
 		<script type="text/javascript">
+
+			var soldout = document.getElementById('Dog0').value;
+			var unsold = document.getElementById('Dog1').value;
+			var ordered = document.getElementById('Dog2').value;
 			// 基于准备好的dom，初始化echarts实例
 			var myChart = echarts.init(document.getElementById('main2'));
 				// 基于准备好的dom，初始化echarts实例
@@ -287,9 +314,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					radius: '60%',
 					center: ['50%', '60%'],
 					data: [
-						{value: 1, name: '已售出'},
-						{value: 3, name: '已下单'},
-						{value: 7, name: '未售出'},
+						{value: soldout, name: '已售出'},
+						{value: ordered, name: '已下单'},
+						{value: unsold, name: '未售出'},
 					],
 					itemStyle: {
 						emphasis: {
@@ -307,6 +334,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</script>
 <div id="main3"></div>
 <script type="text/javascript">
+
+	var soldout = document.getElementById('Reptile0').value;
+	var unsold = document.getElementById('Reptile1').value;
+	var ordered = document.getElementById('Reptile2').value;
 	// 基于准备好的dom，初始化echarts实例
 	var myChart = echarts.init(document.getElementById('main3'));
 		// 基于准备好的dom，初始化echarts实例
@@ -328,9 +359,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			radius: '60%',
 			center: ['50%', '60%'],
 			data: [
-				{value: 1, name: '已售出'},
-				{value: 3, name: '已下单'},
-				{value: 7, name: '未售出'},
+				{value: soldout, name: '已售出'},
+				{value: ordered, name: '已下单'},
+				{value: unsold, name: '未售出'},
 			],
 			itemStyle: {
 				emphasis: {
@@ -348,6 +379,10 @@ myChart.setOption(option);
 
 <div id="main4"></div>
 <script type="text/javascript">
+
+	var soldout = document.getElementById('Cat0').value;
+	var unsold = document.getElementById('Cat1').value;
+	var ordered = document.getElementById('Cat2').value;
 	// 基于准备好的dom，初始化echarts实例
 	var myChart = echarts.init(document.getElementById('main4'));
 		// 基于准备好的dom，初始化echarts实例
@@ -369,9 +404,9 @@ myChart.setOption(option);
 			radius: '60%',
 			center: ['50%', '60%'],
 			data: [
-				{value: 1, name: '已售出'},
-				{value: 3, name: '已下单'},
-				{value: 7, name: '未售出'},
+				{value: soldout, name: '已售出'},
+				{value: ordered, name: '已下单'},
+				{value: unsold, name: '未售出'},
 			],
 			itemStyle: {
 				emphasis: {
@@ -391,6 +426,10 @@ myChart.setOption(option);
 
 <div id="main5"></div>
 <script type="text/javascript">
+
+	var soldout = document.getElementById('Bird0').value;
+	var unsold = document.getElementById('Bird1').value;
+	var ordered = document.getElementById('Bird2').value;
 	// 基于准备好的dom，初始化echarts实例
 	var myChart = echarts.init(document.getElementById('main5'));
 		// 基于准备好的dom，初始化echarts实例
@@ -412,9 +451,9 @@ myChart.setOption(option);
 			radius: '60%',
 			center: ['50%', '60%'],
 			data: [
-				{value: 1, name: '已售出'},
-				{value: 3, name: '已下单'},
-				{value: 7, name: '未售出'},
+				{value: soldout, name: '已售出'},
+				{value: ordered, name: '已下单'},
+				{value: unsold, name: '未售出'},
 			],
 			itemStyle: {
 				emphasis: {
