@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.csu.mypetstore.persistence.InventoryMapper">
+    <select id="getInventoryByCategoryName" resultType="int">
+        select
+            qty
+        from
+            inventory
+        where
+            category = #{categoryName}
+    </select>
+
+    <select id="getSoldOutNumByByCategoryName" resultType="int">
+        select
+            soldout
+        from
+            inventory
+        where
+            category = #{categoryName}
+    </select>
+
+    <select id="getUnsoldNumByCategoryName" resultType="int">
+        select
+            unsold
+        from
+            inventory
+        where
+            category = #{categoryName}
+    </select>
+
+    <select id="getOrderedNumByCategoryName" resultType="int">
+        select
+            ordered
+        from
+            inventory
+        where
+            category = #{categoryName}
+    </select>
+
+
+</mapper>

@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/account")
-@SessionAttributes({"username","account"})
+@SessionAttributes({"username","account", "admin"})
 public class AccountController {
 
     @Autowired

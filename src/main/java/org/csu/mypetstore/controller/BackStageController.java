@@ -6,13 +6,16 @@ import org.csu.mypetstore.domain.Category;
 import org.csu.mypetstore.domain.Order;
 import org.csu.mypetstore.domain.Product;
 import org.csu.mypetstore.service.AccountService;
+import org.csu.mypetstore.service.AdminService;
 import org.csu.mypetstore.service.CatelogService;
 import org.csu.mypetstore.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +32,8 @@ public class BackStageController {
     @Autowired
     OrderService orderService;
 
+    @Autowired
+    AdminService adminService;
 
     @PostMapping("/categoryRename")
     public String categoryRename(String oldProductId, String newName, Model model) {
@@ -100,5 +105,12 @@ public class BackStageController {
         List<Order> orderList = orderService.getAllOrders();
         model.addAttribute("orderList", orderList);
         return "usual/order";
+    }
+
+    @GetMapping("/signOut")
+    public String signOut(HttpSession session, SessionStatus sessionStatus){
+        session.invalidate();
+        sessionStatus.setComplete();
+        return "catalog/Main";
     }
 }

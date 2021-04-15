@@ -2,10 +2,7 @@ package org.csu.mypetstore;
 
 import org.csu.mypetstore.domain.*;
 import org.csu.mypetstore.persistence.AccountMapper;
-import org.csu.mypetstore.service.AccountService;
-import org.csu.mypetstore.service.AdminService;
-import org.csu.mypetstore.service.CatelogService;
-import org.csu.mypetstore.service.OrderService;
+import org.csu.mypetstore.service.*;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +25,8 @@ class MypetstoreApplicationTests {
     CatelogService catelogService;
     @Autowired
     OrderService orderService;
+    @Autowired
+    InventoryService inventoryService;
 
     @Autowired
     AccountService accountService;
@@ -40,10 +39,7 @@ class MypetstoreApplicationTests {
 
     @Test
     void ServiceTest(){
-        Order order = orderService.getOrder(1010);
-        order.setStatus("y");
-        orderService.updateOrderStatus(order);
-        System.out.println(order.getStatus());
+
     }
 
 }
