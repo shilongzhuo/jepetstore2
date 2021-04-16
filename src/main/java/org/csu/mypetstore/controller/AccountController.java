@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -133,12 +132,12 @@ public class AccountController {
     //获得用户信息
     @GetMapping("/getAccount")
     public String getAccount(Model model, HttpSession session){
-        if(session.getAttribute("account")!=null){
+//        if(session.getAttribute("account")!=null){
             model.addAttribute("account",session.getAttribute("account"));
             return "account/EditAccountForm";
-        }else{
-            return "account/login";
-        }
+//        }else{
+//            return "account/login";
+//        }
     }
 
     //获得用户信息

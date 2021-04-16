@@ -129,7 +129,8 @@ public class OrderController {
     //订单最终确认
     @PostMapping("confirmOrder")
     public String ConfirmOrder(Model model,HttpSession session){
-        if(session.getAttribute("order")!=null&&session.getAttribute("account")!=null){
+//        if(session.getAttribute("order")!=null&&session.getAttribute("account")!=null){
+        if(session.getAttribute("order")!=null){
             orderService.insertOrder((Order) session.getAttribute("order"));
             cartService.delCartByUsername((String)session.getAttribute("username"));
 
@@ -152,11 +153,11 @@ public class OrderController {
     //订单信息填写
     @GetMapping("orderInf")
     public String orderInf(Model model,HttpSession session){
-        if(session.getAttribute("account")==null) {
-            return "account/login";
-        }else{
+//        if(session.getAttribute("account")==null) {
+//            return "account/login";
+//        }else{
             return "order/NewOrders";
-        }
+//        }
     }
 
 
