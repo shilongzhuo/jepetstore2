@@ -34,8 +34,8 @@ public class CartController {
         ModelAndView modelAndView;
         if(catelogService.getItem(itemId)==null){
             modelAndView = new ModelAndView("catalog/Main");
-        } else if (session.getAttribute("username")==null||session.getAttribute("usename")=="") {
-            modelAndView = new ModelAndView("account/login");
+//        } else if (session.getAttribute("username")==null||session.getAttribute("usename")=="") {
+//            modelAndView = new ModelAndView("account/login");
         } else {
             cartService.insertCartItem((String) session.getAttribute("username"), itemId);
             modelAndView = new ModelAndView("catalog/Item");
@@ -116,29 +116,29 @@ public class CartController {
     //跳转到购物车页面并查询购物车信息
     @GetMapping("/viewCart")
     public String viewCart(Model model,HttpSession session){
-        if (session.getAttribute("account")==null) {
-            String message_account = "登录信息缺失，请重新登陆";
-            model.addAttribute("message_account",message_account);
-            return "account/login";
-        } else{
+//        if (session.getAttribute("account")==null) {
+//            String message_account = "登录信息缺失，请重新登陆";
+//            model.addAttribute("message_account",message_account);
+//            return "account/login";
+//        } else{
             Cart cart = cartService.getCartByUsername((String)session.getAttribute("username"));
             model.addAttribute("cart",cart);
             return "cart/Cart";
-        }
+//        }
     }
 
     //检查确认购物车信息
     @GetMapping("/confirmCart")
     public String confirmCart(Model model,HttpSession session){
-        if (session.getAttribute("account")==null) {
-            String message_account = "登录信息缺失，请重新登陆";
-            model.addAttribute("message_account",message_account);
-            return "account/login";
-        } else{
+//        if (session.getAttribute("account")==null) {
+//            String message_account = "登录信息缺失，请重新登陆";
+//            model.addAttribute("message_account",message_account);
+//            return "account/login";
+//        } else{
             Cart cart = cartService.getCartByUsername((String)session.getAttribute("username"));
             model.addAttribute("cart",cart);
             return "cart/Checkout";
-        }
+//        }
     }
 
 }

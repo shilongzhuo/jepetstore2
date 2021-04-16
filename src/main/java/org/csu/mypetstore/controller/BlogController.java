@@ -20,13 +20,13 @@ public class BlogController {
 
     @GetMapping("/getBlog")
     public String getBlog(Model model,HttpSession session){
-        if(session.getAttribute("account")==null){
-            return "account/login";
-        }else{
+//        if(session.getAttribute("account")==null){
+//            return "account/login";
+//        }else{
             String username = session.getAttribute("username").toString();
             List<Blog> blogList = blogService.getBlogByUsername(username);
             model.addAttribute("blogList",blogList);
             return "blog/Blog";
-        }
+//        }
     }
 }

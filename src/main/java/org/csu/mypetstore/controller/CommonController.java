@@ -36,18 +36,18 @@ public class CommonController {
     @Autowired
     AdminService adminService;
 
-    // 判断是否登录为管理员
-    private boolean isAdmin(HttpSession session) {
-        String adminName = (String)session.getAttribute("admin");
-        if (adminName == null){
-            return false;
-        } else return true;
-    }
+//    // 判断是否登录为管理员
+//    private boolean isAdmin(HttpSession session) {
+//        String adminName = (String)session.getAttribute("admin");
+//        if (adminName == null){
+//            return false;
+//        } else return true;
+//    }
 
     @GetMapping("/index")
     public String index(Model model, HttpSession session){
 
-        if(isAdmin(session)){
+//        if(isAdmin(session)){
             int[] BIRDS = {inventoryService.getSoldOutNumByByCategoryName("BIRDS"), inventoryService.getUnsoldNumByCategoryName("BIRDS"), inventoryService.getOrderedNumByCategoryName("BIRDS")};
             int[] CATS = {inventoryService.getSoldOutNumByByCategoryName("CATS"), inventoryService.getUnsoldNumByCategoryName("CATS"), inventoryService.getOrderedNumByCategoryName("CATS")};
             int[] DOGS = {inventoryService.getSoldOutNumByByCategoryName("DOGS"), inventoryService.getUnsoldNumByCategoryName("DOGS"), inventoryService.getOrderedNumByCategoryName("DOGS")};
@@ -60,59 +60,59 @@ public class CommonController {
             model.addAttribute("FishList", FISH);
             model.addAttribute("ReptileList", REPTILES);
             return "usual/index";
-        } else
-            return "catalog/Main";
+//        } else
+//            return "catalog/Main";
 
     }
 
     @GetMapping("/goods")
     public String goods(Model model, HttpSession session) {
 
-        if (isAdmin(session)) {
+//        if (isAdmin(session)) {
             List<Product> productList = catelogService.getAllProducts();
             model.addAttribute("productList", productList);
 
             return "usual/goods";
-        }
-        else
-            return "catalog/Main";
+//        }
+//        else
+//            return "catalog/Main";
 
     }
 
     @GetMapping("/users")
     public String users(Model model, HttpSession session){
 
-        if(isAdmin(session)) {
+//        if(isAdmin(session)) {
             // 向数据库查询所有用户信息
             List<Account> accountList = accountService.getAccountList();
             model.addAttribute("accountList", accountList);
             return "usual/users";
-        }
-        else
-            return "catalog/Main";
+//        }
+//        else
+//            return "catalog/Main";
 
     }
 
     @GetMapping("/order")
     public String order(Model model, HttpSession session){
 
-        if (isAdmin(session)) {
+//        if (isAdmin(session)) {
             // 向数据库查询所有订单信息
             List<Order> orderList = orderService.getAllOrders();
             model.addAttribute("orderList", orderList);
             return "usual/order";
-        } else
-            return "catalog/Main";
+//        } else
+//            return "catalog/Main";
 
 
     }
 
     @GetMapping("/infor")
     public String infor(HttpSession session){
-        if (isAdmin(session))
+//        if (isAdmin(session))
             return "usual/infor";
-        else
-            return "catalog/Main";
+//        else
+//            return "catalog/Main";
     }
 
     @GetMapping("/login")
