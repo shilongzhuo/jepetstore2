@@ -36,10 +36,10 @@ public class BackStageController {
     AdminService adminService;
 
     @PostMapping("/categoryRename")
-    public String categoryRename(String oldProductId, String newName, Model model) {
+    public String categoryRename(String productId, String newName, Model model) {
 
         // 更新小类名称
-        Product product = catelogService.getProduct(oldProductId);
+        Product product = catelogService.getProduct(productId);
         product.setName(newName);
         catelogService.updateProduct(product);
 

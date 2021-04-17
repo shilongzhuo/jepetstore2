@@ -226,7 +226,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<tr th:each="product, productStat:${productList}">
 				<td th:text="${productStat.index+1}">1</td>
 
-				<td th:text="${product.name}"></td>
+				<td th:text="${product.name}" th:id="${product.productId}"></td>
 				<td></td>
 				<td></td>
 				<td></td>
@@ -250,7 +250,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 <script type="text/javascript">
 
-	function rename(oldProductId, oldName) {
+	function rename(productId, oldName) {
 
 		let code = prompt("请输入新名称:", oldName);
 		console.log(code);
@@ -267,12 +267,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				type: "POST",
 				url: "/backstage/categoryRename",
 				data: {
-					"oldProductId": oldProductId,
+					"productId": productId,
 					"newName": code
 				},
 				success: function () {
 					console.log("success");
-					document.getElementById("productName").textContent = code;
+					document.getElementById(productId).textContent = code;
 					alert("修改成功");
 				}
 			});
@@ -280,7 +280,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	}
 	function remove(productId){
 
-		if (confirm("确定要删除这个小类吗？")) {
+		if (confirm("确定要下架这个小类吗？")) {
 			$.ajax({
 				type: "POST",
 				url: "/backstage/categoryRemove",

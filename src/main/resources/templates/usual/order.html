@@ -238,10 +238,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<td th:if="${order.getStatus()} eq 'n'" th:text="未发货">已发货</td>
 				<td th:if="${order.getStatus()} eq 'y'" th:text="已发货">未发货</td>
 				<td>
-					<a href="#" class="btn" th:name="${order.orderId}" onclick="remove(this.name)">remove</a>
+					<button class="btn" th:name="${order.orderId}" onclick="remove(this.name)">remove</button>
 				</td>
 				<td>
-					<a href="#" class="btn" th:name="${order.orderId}" onclick="deliver(this.name)">deliver</a>
+					<button class="btn" th:name="${order.orderId}" onclick="deliver(this.name)">deliver</button>
 				</td>
 			</tr>
 		</table>

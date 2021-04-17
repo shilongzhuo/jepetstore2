@@ -3,6 +3,7 @@ package org.csu.mypetstore.controller;
 import org.csu.mypetstore.domain.Account;
 import org.csu.mypetstore.service.AccountService;
 import org.csu.mypetstore.service.AdminService;
+import org.csu.mypetstore.service.InventoryService;
 import org.csu.mypetstore.service.VerificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,8 @@ public class AccountController {
     VerificationService verificationService;
     @Autowired
     AdminService adminService;
+    @Autowired
+    InventoryService inventoryService;
 
     //登录或修改用户信息的验证码
     @GetMapping("/getVerification")
@@ -87,6 +90,17 @@ public class AccountController {
         }else{
             if(adminService.getAdmin(account.getUsername(),account.getPassword())!=null){
                 model.addAttribute("admin",adminService.getAdmin(account.getUsername(),account.getPassword()));
+                int[] BIRDS = {inventoryService.getSoldOutNumByByCategoryName("BIRDS"), inventoryService.getUnsoldNumByCategoryName("BIRDS"), inventoryService.getOrderedNumByCategoryName("BIRDS")};
+                int[] CATS = {inventoryService.getSoldOutNumByByCategoryName("CATS"), inventoryService.getUnsoldNumByCategoryName("CATS"), inventoryService.getOrderedNumByCategoryName("CATS")};
+                int[] DOGS = {inventoryService.getSoldOutNumByByCategoryName("DOGS"), inventoryService.getUnsoldNumByCategoryName("DOGS"), inventoryService.getOrderedNumByCategoryName("DOGS")};
+                int[] FISH = {inventoryService.getSoldOutNumByByCategoryName("FISH"), inventoryService.getUnsoldNumByCategoryName("FISH"), inventoryService.getOrderedNumByCategoryName("FISH")};
+                int[] REPTILES = {inventoryService.getSoldOutNumByByCategoryName("REPTILES"), inventoryService.getUnsoldNumByCategoryName("REPTILES"), inventoryService.getOrderedNumByCategoryName("REPTILES")};
+
+                model.addAttribute("BirdList", BIRDS);
+                model.addAttribute("CatList", CATS);
+                model.addAttribute("DogList", DOGS);
+                model.addAttribute("FishList", FISH);
+                model.addAttribute("ReptileList", REPTILES);
                 return "usual/index";
             }else{
                 String message_login = "管理员用户名或密码错误";
