@@ -28,7 +28,7 @@
         </tr>
         <tr th:each="item:${itemList}">
             <td><a th:text="${item.itemId}" th:href="@{'/catalog/viewItem?itemId=' + ${item.itemId}}">item.itemId</a></td>
-            <td><a th:text="${item.productId}" th:href="@{'/catalog/viewProduct?productId=' + ${item.productId}}">item.productId</a></td>
+            <td th:text="${item.productId}">item.productId</td>
             <td th:text="${item.attribute1}+${item.product.name}">item.Description</td>
             <td th:text="${item.listPrice}">item.listPrice</td>
             <td><a th:href="@{'/cart/addItem?itemId=' + ${item.itemId}}" ><input type="button" value="添加到购物车"></a></td>

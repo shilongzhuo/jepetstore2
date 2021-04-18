@@ -7,7 +7,7 @@
         select
             qty
         from
-            inventory
+            ninventory
         where
             category = #{categoryName}
     </select>
@@ -16,7 +16,7 @@
         select
             soldout
         from
-            inventory
+            ninventory
         where
             category = #{categoryName}
     </select>
@@ -25,7 +25,7 @@
         select
             unsold
         from
-            inventory
+            ninventory
         where
             category = #{categoryName}
     </select>
@@ -34,7 +34,7 @@
         select
             ordered
         from
-            inventory
+            ninventory
         where
             category = #{categoryName}
     </select>
