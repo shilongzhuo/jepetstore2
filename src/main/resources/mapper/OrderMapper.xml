@@ -217,7 +217,7 @@
 
     <select id="getSoldItemQuantityByItemId" resultType="int">
         select
-            sum(lineItem)
+        sum(lineItem)
         from orderitem
         where itemId = #{itemId}
     </select>

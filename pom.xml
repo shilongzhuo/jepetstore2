@@ -75,7 +75,13 @@
             <artifactId>commons-codec</artifactId>
             <version>1.11</version>
         </dependency>
-
+        <!--Oracle数据库连接配置 -->
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc14</artifactId>
+            <version>10.2.0.4.0</version>
+            <type>pom</type>
+        </dependency>
         <!-- 热更新插件 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

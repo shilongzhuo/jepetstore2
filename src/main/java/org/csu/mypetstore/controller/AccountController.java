@@ -63,7 +63,8 @@ public class AccountController {
         }
     }
 
-    @PostMapping("/signon")
+    @GetMapping("/signon")
+    @ResponseBody
     public String signon(Account account,String verification,String Fruit, Model model) {
         if(Fruit.equals("User")){
             if(verificationService.getVerificationCodeByUsername(account.getUsername())==null){//判断是否已经获得验证码
@@ -105,13 +106,12 @@ public class AccountController {
             }else{
                 String message_login = "管理员用户名或密码错误";
                 model.addAttribute("message_login",message_login);
-                return "account/login";
+                return "login";
             }
         }
     }
 
     @PostMapping("/newAccount")
-    @ResponseBody
     public String newAccount(Account account,String verification,Model model){
         if(account.getPassword()!=""||account.getPassword()!=null||account.getUsername()!=""||account.getUsername()!=null||account.getEmail()!=""||account.getEmail()!=null){
             if(!verificationService.getVerificationCodeByUsername(account.getUsername()).getCode().equals(verification)){
